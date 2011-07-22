@@ -35,3 +35,7 @@ group :test do
   gem 'webrat', '0.7.1'
   gem 'spork', '0.9.0.rc8'
 end
+
+# Hack to workaround Heroku 'uninitialized constant Rake::DSL'
+#
+gem "rake", "0.8.7"
