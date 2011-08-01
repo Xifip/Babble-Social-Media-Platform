@@ -1,113 +1,128 @@
-.container {
-  width: 710px;
-}
-
 body {
-  background: #EFEFEF;
+    background: #EFEFEF;
 }
 
 header {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
 header img {
-  padding: 0.5em;
-  background: #fff;
+    padding: 0.5em;
+    background: #fff;
 }
 
 section {
-  margin-top: 1em;
-  font-size: 120%;
-  padding: 20px;
-  background: #fff;
+    margin-top: 1em;
+    font-size: 120%;
+    padding: 20px;
+    background: #fff;
+    overflow: auto;
 }
 
 section h1 {
-  font-size: 200%;
+    font-size: 200%;    
 }
 
 /* Links */
 
 a {
-  color: #0088ee;
-  text-decoration: none;
+    color: #0088ee;
+    text-decoration: none;
 }
 
 a:hover {
-  color: #0088ee;
-  text-decoration: none;
+    color: #0088ee;
+    text-decoration: none;
 }
 
 a:visited {
-  color: #0088ee;
+    color: #0088ee;
 }
 
 a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #0088ee;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+    width: 190px;
+    color: #fff;
+    background: #0088ee;
+    font-size: 150%;
+    font-weight: bold;
+    padding: 20px;
 }
 
 nav {
-  float: right;
-  font-size: 120%;
+    float: right;
+    font-size: 120%;
 }
 
 nav {
-  background-color: white;
-  padding: 0 0.7em;
-  white-space: nowrap;
+    background-color: white;
+    padding: 0 0.7em;
+    white-space: nowrap;
 }
 
 nav ul {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
-  list-style-type: none;
-  display: inline-block;
-  padding: 0.2em 0;
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.2em 0;
 }
 
 nav ul li a {
-  padding: 0 5px;
-  font-weight: bold;
+    padding: 0 5px;
+    font-weight: bold;
 }
 
 nav ul li a:visited {
-  color: #0088ee;
+    color: #0088ee;
 }
 
 nav ul li a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 /* Round corners */
 
 .round {
-  -moz-border-radius:    8px;
-  -webkit-border-radius: 8px;
-  border-radius:         8px;
+    -moz-border-radius:    8px;
+    -webkit-border-radius: 8px;
+    border-radius:         8px;
 }
 
 /* footer */
 
 footer {
-  text-align: center;
-  margin-top: 10px;
-  width: 710px;
-  margin-left: auto;
-  margin-right: auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    clear: both;
 }
 
 footer nav {
-  float: none;
+    float: none;
+}
+
+/* User show page */
+
+.main {
+    padding: 1em;
+}
+
+.sidebar {
+  padding: 1em;
+  vertical-align: top;
+  background: #ffc;
+}
+
+.main img.gravatar {
+  border: 1px solid #999;
+  margin-bottom: -15px;
+  vertical-align: middle;
 }
