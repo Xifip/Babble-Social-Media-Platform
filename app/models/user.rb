@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   #attributes that are 'virtual'; they can only exist in memory
   attr_accessor :password
   
-  #normally persisted attribute accessors
+  #normally persisted attribute accessors, only attributes in this list can be
+  #set via normal http requests
   attr_accessible :name, :email, :password, :password_confirmation
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

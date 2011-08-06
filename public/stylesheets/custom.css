@@ -173,3 +173,13 @@ footer nav {
   font-size: 12px;
   list-style: square;
 }
+
+/* User list styling*/
+
+ul.users {
+  margin-top: 1em;
+}
+
+.users li {
+  list-style: none;
+}
