@@ -1,0 +1,12 @@
+<h1>Users</h1>
+
+<%-# Will_paginate method automatically adds :page to params and handles pagination%>
+<%= will_paginate %>
+
+<ul class="users">
+
+  <%= render @users %>
+
+</ul>
+
+<%= will_paginate %>
