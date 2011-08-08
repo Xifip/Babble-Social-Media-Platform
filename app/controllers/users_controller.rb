@@ -10,23 +10,32 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
-    @title = "Sign Up"
+    if signed_in?
+      redirect_to root_path
+    else
+      @user = User.new
+      @title = "Sign Up"
+    end
+    
   end
   
   def create
-    @user = User.new(params[:user])
-    
-    if @user.save
-      sign_in @user
-      flash[:success] = "welcome to babble !"
-      redirect_to @user
+    if signed_in?
+      redirect_to root_path
     else
-      @user.password = ""
-      @user.password_confirmation = ""
-      @title = "Sign Up"
-      render 'new'
-    end    
+      @user = User.new(params[:user])
+    
+      if @user.save
+        sign_in @user
+        flash[:success] = "welcome to babble !"
+        redirect_to @user
+      else
+        @user.password = ""
+        @user.password_confirmation = ""
+        @title = "Sign Up"
+        render 'new'
+      end    
+    end      
   end
   
   def edit
@@ -50,24 +59,29 @@ class UsersController < ApplicationController
   end
   
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
+    user_to_be_deleted = User.find(params[:id])
+    if current_user == user_to_be_deleted
+      flash[:error] = "you cannot delete yourself via the web UI !"
+    else
+      user_to_be_deleted.destroy
+      flash[:success] = "User deleted."  
+    end    
     redirect_to users_path
   end
   
   private
 
-    def authenticate
-      deny_access unless signed_in?
-    end
+  def authenticate
+    deny_access unless signed_in?
+  end
     
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_path) unless current_user?(@user)
+  end
     
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
 
 end
