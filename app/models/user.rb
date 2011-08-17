@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   #set via normal http requests
   attr_accessible :name, :email, :password, :password_confirmation
   
+  has_many :microposts, :dependent => :destroy
+  
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :name, :presence => true, :length => { :maximum => 50}
@@ -42,6 +44,10 @@ class User < ActiveRecord::Base
   def has_password?(submitted_password)
     #compare encrypted passwords with the submitted_password
     encrypted_password == encrypt(submitted_password)
+  end
+  
+  def feed
+    Micropost.where("user_id = ?", id)
   end
   
   private

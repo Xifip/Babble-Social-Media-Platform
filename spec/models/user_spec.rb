@@ -168,4 +168,48 @@ describe User do
     
   end
   
+  describe "micropost associations" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+      @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago)
+      @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago)
+    end
+    
+    it "should respond to microposts" do
+      @user.should respond_to(:microposts)
+    end
+    
+    it "should return the micropost collection in reverse chronological order" do
+      @user.microposts.should == [@mp2, @mp1]
+    end
+    
+    it "should delete a user's microposts if the user is deleted" do
+      @user.destroy
+      [@mp1, @mp2].each do |mp|
+        Micropost.find_by_id(mp.id).should be_nil
+      end
+    end
+    
+    describe "status feed" do
+      
+      it "should have a feed method" do
+        @user.should respond_to(:feed)
+      end
+      
+      it "should include the user's posts" do
+        @user.feed.include?(@mp1).should be_true
+        @user.feed.include?(@mp2).should be_true
+      end
+      
+      it "should not contain another user's posts" do
+        @user2 = Factory(:user, :email => Factory.next(:email))
+        @mp3 = Factory(:micropost, :user => @user2)
+        @user.feed.include?(@mp3).should be_false        
+      end
+      
+    end
+    
+  end
+  
 end

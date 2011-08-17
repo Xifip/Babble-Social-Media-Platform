@@ -1,4 +1,5 @@
-<h1>Babble</h1>
-<p>This is the home page for the Babble Social Platform</p>
-
-<%= link_to "Sign Up", signup_path, :class => "signup_button round" %>
+<% if signed_in? %>
+  <%= render 'pages/signed_in_home' %>
+<% else %>
+  <%= render 'pages/not_signed_in_home' %>
+<% end %>
