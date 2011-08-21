@@ -210,6 +210,65 @@ describe User do
       
     end
     
+    describe "relationships" do
+      
+      before(:each) do
+        @user = User.create!(@attr.merge(:email => "newemail@gmail.com"))
+        @followed = Factory(:user)
+      end
+      
+      it "should have a relationships method" do
+        @user.should respond_to(:relationships)
+      end
+      
+      it "should have a following method" do
+        @user.should respond_to(:following)
+      end
+      
+      it "should have a following? method" do
+        @user.should respond_to(:following?)
+      end
+      
+      it "should have a follow! method" do
+        @user.should respond_to(:follow!)
+      end
+      
+      it "should follow another user" do
+        @user.follow!(@followed)
+        @user.should be_following(@followed)
+      end
+      
+      it "should have the followed user inside the following array" do
+        @user.follow!(@followed)
+        @user.following.should include(@followed)
+      end
+      
+      it "should have an unfollow! method" do
+        @user.should respond_to(:unfollow!)
+      end
+      
+      it "should unfollow a specific followed user" do
+        @user.follow!(@followed)
+        @user.unfollow!(@followed)
+        @user.should_not be_following(@followed)
+      end
+      
+      it "should have a reverse_relationships" do
+        @user.should respond_to(:reverse_relationships)
+      end
+      
+      it "should have a followers method" do
+        @user.should respond_to(:followers)
+      end
+      
+      it "should have users who follow a user" do
+        @user.follow!(@followed)
+        @followed.followers.should include(@user)
+      end      
+      
+      
+    end
+    
   end
   
 end
