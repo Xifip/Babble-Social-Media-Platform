@@ -1,8 +1,18 @@
 Babble::Application.routes.draw do
   
-  resources :users
+  resources :users do
+    
+    # allows HTTP request of GET to /users/1/following and /users/1/followers
+    # ie. for members of users, allow for the getting through these urls
+    member do      
+      get :following, :followers
+    end
+  end
+  
   resources :sessions, :only => [ :new, :create, :destroy ]
   resources :microposts, :only => [ :create, :destroy ]
+  resources :relationships, :only => [ :create, :destroy ]
+  
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'

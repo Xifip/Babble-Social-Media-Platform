@@ -19,7 +19,7 @@ describe User do
       :email => "abc@gmail.com",
       :password => "password",
       :password_confirmation => "password"
-      }
+    }
   end
   
   #the ! after create raises an invalid record error if the creation fails
@@ -206,69 +206,76 @@ describe User do
         @user2 = Factory(:user, :email => Factory.next(:email))
         @mp3 = Factory(:micropost, :user => @user2)
         @user.feed.include?(@mp3).should be_false        
-      end
-      
-    end
-    
-    describe "relationships" do
-      
-      before(:each) do
-        @user = User.create!(@attr.merge(:email => "newemail@gmail.com"))
-        @followed = Factory(:user)
-      end
-      
-      it "should have a relationships method" do
-        @user.should respond_to(:relationships)
-      end
-      
-      it "should have a following method" do
-        @user.should respond_to(:following)
-      end
-      
-      it "should have a following? method" do
-        @user.should respond_to(:following?)
-      end
-      
-      it "should have a follow! method" do
-        @user.should respond_to(:follow!)
-      end
-      
-      it "should follow another user" do
-        @user.follow!(@followed)
-        @user.should be_following(@followed)
-      end
-      
-      it "should have the followed user inside the following array" do
-        @user.follow!(@followed)
-        @user.following.should include(@followed)
-      end
-      
-      it "should have an unfollow! method" do
-        @user.should respond_to(:unfollow!)
-      end
-      
-      it "should unfollow a specific followed user" do
-        @user.follow!(@followed)
-        @user.unfollow!(@followed)
-        @user.should_not be_following(@followed)
-      end
-      
-      it "should have a reverse_relationships" do
-        @user.should respond_to(:reverse_relationships)
-      end
-      
-      it "should have a followers method" do
-        @user.should respond_to(:followers)
-      end
-      
-      it "should have users who follow a user" do
-        @user.follow!(@followed)
-        @followed.followers.should include(@user)
       end      
       
+      it "should contain the posts of someone being followed" do
+        @user3 = Factory(:user, :email => Factory.next(:email))
+        @micropost_from_followed = Factory(:micropost, :user => @user3)
+        @user.follow!(@user3)
+        @user.feed.should include(@micropost_from_followed)
+      end
       
     end
     
+    
   end
+    
+  describe "relationships" do
+      
+    before(:each) do
+      @user = User.create!(@attr)
+      @followed = Factory(:user)
+    end
+      
+    it "should have a relationships method" do
+      @user.should respond_to(:relationships)
+    end
+      
+    it "should have a following method" do
+      @user.should respond_to(:following)
+    end
+      
+    it "should have a following? method" do
+      @user.should respond_to(:following?)
+    end
+      
+    it "should have a follow! method" do
+      @user.should respond_to(:follow!)
+    end
+      
+    it "should follow another user" do
+      @user.follow!(@followed)
+      @user.should be_following(@followed)
+    end
+      
+    it "should have the followed user inside the following array" do
+      @user.follow!(@followed)
+      @user.following.should include(@followed)
+    end
+      
+    it "should have an unfollow! method" do
+      @user.should respond_to(:unfollow!)
+    end
+      
+    it "should unfollow a specific followed user" do
+      @user.follow!(@followed)
+      @user.unfollow!(@followed)
+      @user.should_not be_following(@followed)
+    end
+      
+    it "should have a reverse_relationships" do
+      @user.should respond_to(:reverse_relationships)
+    end
+      
+    it "should have a followers method" do
+      @user.should respond_to(:followers)
+    end
+      
+    it "should have users who follow a user" do
+      @user.follow!(@followed)
+      @followed.followers.should include(@user)
+    end     
+  end    
+  
   
 end
