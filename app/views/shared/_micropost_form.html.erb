@@ -13,7 +13,7 @@ document.getElementById(countdown).value = '('+(maxlimit-textareaid.value.length
   <div class="field">
     <%= f.text_area :content, 
       :onKeyDown => "textCounter('micropost_content', 'micropostLengthCount', 200)",
-      :onKeyDown => "textCounter('micropost_content', 'micropostLengthCount', 200)",
+      :onKeyUp => "textCounter('micropost_content', 'micropostLengthCount', 200)",
     %>
     <input id="micropostLengthCount" readonly type="text" class="noborder"/>
   </div>
