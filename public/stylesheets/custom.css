@@ -27,6 +27,10 @@ div.field, div.actions {
     margin-bottom: 10px;
 }
 
+input.noborder {
+    border: none;
+}
+
 /* Links */
 
 a {
@@ -244,4 +248,8 @@ form.new_micropost {
 form.new_micropost textarea {
     height: 4em;
     margin-bottom: 0;
+}
+
+#micropostLengthCount {
+    color: #333;
 }

@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def logo
-    logo = image_tag("beachapetitle.png", :alt => "Babble", :class => "round")    
+    logo = image_tag("babble_logo.png", :alt => "Babble", :class => "round")    
   end
   
 end
