@@ -216,7 +216,8 @@ ul.users {
 
 .users li {
     list-style: none;
-    line-height: 65px;
+    line-height: 65px;    
+    padding-left: 0.75em;
     height: 65px;
     border-bottom: dotted 1px #ccc; 
 }
