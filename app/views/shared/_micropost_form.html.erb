@@ -1,12 +1,12 @@
 <script>
-function textCounter(textarea, countdown, maxlimit)
-{
-textareaid = document.getElementById(textarea);
-if (textareaid.value.length > maxlimit)
-textareaid.value = textareaid.value.substring(0, maxlimit);
-else
-document.getElementById(countdown).value = '('+(maxlimit-textareaid.value.length)+' characters left)';
-}
+  function textCounter(textarea, countdown, maxlimit)
+  {
+    textareaid = document.getElementById(textarea);
+    if (textareaid.value.length > maxlimit)
+      textareaid.value = textareaid.value.substring(0, maxlimit);
+    else
+      document.getElementById(countdown).value = '  ('+(maxlimit-textareaid.value.length)+' characters left)';
+  }
 </script>
 <%= form_for @micropost do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
@@ -14,10 +14,15 @@ document.getElementById(countdown).value = '('+(maxlimit-textareaid.value.length
     <%= f.text_area :content, 
       :onKeyDown => "textCounter('micropost_content', 'micropostLengthCount', 200)",
       :onKeyUp => "textCounter('micropost_content', 'micropostLengthCount', 200)",
-    %>
-    <input id="micropostLengthCount" readonly type="text" class="noborder"/>
+      :class => "micropost_input"
+  %>
+
   </div>
-  <div class="actions">
+  <div class="actions left">
     <%= f.submit "Submit" %>
   </div>
+  <div class="right">
+    <input id="micropostLengthCount" readonly type="text" class="noborder"/>
+  </div>
 <% end %>
+<br/>

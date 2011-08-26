@@ -3,12 +3,14 @@
   <div class="span-2 feed_photo">
     <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   </div>
-  <div class="span-11">
+  <div class="wrap span-11">
     <div>
       <%= link_to feed_item.user.name, feed_item.user %>
     </div>
     <div>
-      <%= feed_item.content %>
+      <h4>
+        <%= feed_item.content %>
+      </h4>
     </div>
     <div class="feed_item_create_date">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
@@ -17,7 +19,7 @@
 
   <% if current_user?(feed_item.user) %>
 
-    <div class="right span-1">
+    <div class="right span-1 small">
       <%= link_to "delete", feed_item, :method => :delete,
 
         :confirm => "You sure?",

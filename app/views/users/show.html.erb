@@ -1,21 +1,19 @@
-<div class="column span-16 round main">
-  <h1>
-    <div>
-    <%= gravatar_for @user %>    
-    <%= @user.name %>
-    </div>
+<div class="column span-16 main">
+  <h1>    
+      <%= gravatar_for @user %>    
+      <%= @user.name %>    
   </h1>
   <%= render 'follow_form' if signed_in? %>
   <% unless @user.microposts.empty? %>  
-    <ul>
+    <ul class="styleless">
       <%= render @microposts %>
     </ul>
-  <br/>
+    <br/>
     <%= will_paginate @microposts  %>
   <% end %>
 </div>
-<div class="column span-5 last round sidebar">
-  <strong>Name</strong> <%= @user.name %><br />
+<div class="column span-5 wrap last round sidebar">
+  <strong>Name</strong> <%= @user.name %><br/>
   <strong>URL</strong>  <%= link_to user_path(@user), @user %>
   <strong>Microposts</strong> <%= @user.microposts.count %>
   <%= render 'shared/stats' %>

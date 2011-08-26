@@ -1,5 +1,5 @@
 body {
-    background: #eeeeee;
+        
 }
 
 header {
@@ -29,6 +29,15 @@ div.field, div.actions {
 
 input.noborder {
     border: none;
+}
+
+ul.styleless {
+    list-style:none;
+}
+
+.wrap {
+    word-spacing: normal;
+    word-wrap: break-word;
 }
 
 /* Links */
@@ -95,12 +104,30 @@ nav ul li a:hover {
     text-decoration: none;
 }
 
+/* borders */
+
+.border_bottom{
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #ddd;    
+}
+
+.border_top{
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: #ddd;    
+}
+
 /* Round corners */
 
 .round {
-    -moz-border-radius:    8px;
-    -webkit-border-radius: 8px;
-    border-radius:         8px;
+    -moz-border-radius:    3px;
+    -webkit-border-radius: 3px;
+    border-radius:         3px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ddd;
+        
 }
 
 /* footer */
@@ -127,6 +154,10 @@ footer nav {
     padding: 1em;
     vertical-align: top;
     background: #ddffcc;    
+}
+
+.sidebar_users{
+    margin: 0px 12px;
 }
 
 .main img.gravatar {
@@ -255,7 +286,7 @@ form.new_micropost textarea {
 }
 
 li.feed_line:first-child {    
-    border-top: dotted 1px #888; 
+    border-top: dotted 1px #ccc; 
     padding-top: 20px;
 }
 
@@ -263,7 +294,7 @@ li.feed_line {
     clear:both; 
     margin-top: 20px; 
     overflow:auto; 
-    border-bottom: dotted 1px #888; 
+    border-bottom: dotted 1px #ccc; 
     padding-bottom: 20px;
 }
 
@@ -273,4 +304,8 @@ li.feed_line {
 
 .feed_item_create_date {
     font-size: 70%;
+}
+
+.micropost_input{
+    width: 600px;
 }
