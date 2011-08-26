@@ -32,7 +32,7 @@ describe "Microposts" do
           visit root_path
           fill_in :micropost_content, :with => "Some randomness"
           click_button
-          response.should have_selector("span.content", :content => "Some randomness")          
+          response.should have_selector("li>div>div>h4", :content => "Some randomness")          
         end.should change(Micropost, :count).by(1)        
       end
     end
