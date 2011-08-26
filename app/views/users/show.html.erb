@@ -1,10 +1,10 @@
 <div class="column span-16 main">
   <h1>    
-      <%= gravatar_for @user %>    
-      <%= @user.name %>    
+    <%= gravatar_for @user %>    
+    <%= @user.name %>    
   </h1>
   <%= render 'follow_form' if signed_in? %>
-  <% unless @user.microposts.empty? %>  
+  <% unless @user.microposts.empty? %> 
     <ul class="styleless">
       <%= render @microposts %>
     </ul>

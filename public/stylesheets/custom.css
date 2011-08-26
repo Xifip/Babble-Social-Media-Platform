@@ -216,8 +216,16 @@ ul.users {
 
 .users li {
     list-style: none;
-    line-height: 40px;
-    height: 40px;
+    line-height: 65px;
+    height: 65px;
+    border-bottom: dotted 1px #ccc; 
+}
+
+.users li:last-child {
+    list-style: none;
+    line-height: 65px;
+    height: 65px;
+    border-bottom: none;
 }
 
 .users img.gravatar {
@@ -285,9 +293,13 @@ form.new_micropost textarea {
     color: #333;
 }
 
-li.feed_line:first-child {    
-    border-top: dotted 1px #ccc; 
-    padding-top: 20px;
+li.feed_line:first-child {
+    padding-top: 10px;
+}
+
+li.feed_line:last-child {
+    padding-bottom: 20px;
+    border-bottom: none;
 }
 
 li.feed_line {

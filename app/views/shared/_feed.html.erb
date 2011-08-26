@@ -1,4 +1,5 @@
 <% unless @feed_items.empty? %>
+  <h3>News Feed</h3>
   <ul class="styleless">
     <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
   </ul>
