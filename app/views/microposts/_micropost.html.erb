@@ -1,16 +1,25 @@
-<tr>
-  <td class="micropost">
-    <span class="content"><%= micropost.content %></span>
-    <span class="timestamp">
+
+
+<li class="feed_line">
+
+  <div class="span-13">
+    <div>
+      <h3><%= micropost.content %></h3>
+    </div>
+    <div class="feed_item_create_date">
       Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-    </span>
-  </td>
+    </div>
+  </div>
+
   <% user = micropost.user rescue User.find(micropost.user_id) %>
   <% if current_user?(user) %>
-    <td>
+
+    <div class="right span-1">
       <%= link_to "delete", micropost, :method => :delete, 
         :confirm => "You sure?",
         :title => micropost.content %>
-    </td>
+    </div>
   <% end %>
-</tr>
+
+
+</li>

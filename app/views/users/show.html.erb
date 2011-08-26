@@ -1,4 +1,4 @@
-<div class="column span-17 round main">
+<div class="column span-16 round main">
   <h1>
     <div>
     <%= gravatar_for @user %>    
@@ -7,13 +7,14 @@
   </h1>
   <%= render 'follow_form' if signed_in? %>
   <% unless @user.microposts.empty? %>  
-    <table class="microposts" summary="User microposts">
+    <ul>
       <%= render @microposts %>
-    </table>
+    </ul>
+  <br/>
     <%= will_paginate @microposts  %>
   <% end %>
 </div>
-<div class="column span-4 last round sidebar">
+<div class="column span-5 last round sidebar">
   <strong>Name</strong> <%= @user.name %><br />
   <strong>URL</strong>  <%= link_to user_path(@user), @user %>
   <strong>Microposts</strong> <%= @user.microposts.count %>
