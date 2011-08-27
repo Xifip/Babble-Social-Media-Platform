@@ -1,5 +1,5 @@
 body {
-        
+
 }
 
 header {
@@ -127,7 +127,7 @@ nav ul li a:hover {
     border-style: solid;
     border-width: 1px;
     border-color: #ddd;
-        
+
 }
 
 /* footer */
@@ -321,4 +321,5 @@ li.feed_line {
 
 .micropost_input{
     width: 600px;
+    font-family: Helvetica, Arial, sans-serif;
 }

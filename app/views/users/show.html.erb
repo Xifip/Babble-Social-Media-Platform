@@ -3,7 +3,12 @@
     <%= gravatar_for @user %>    
     <%= @user.name %>    
   </h1>
-  <%= render 'follow_form' if signed_in? %>
+  <% if (current_user?(@user) && signed_in?) %>
+    Whats up?
+    <%= render 'shared/micropost_form' %>
+  <%  else %>
+    <%= render 'follow_form' if signed_in? %>
+  <% end %>
   <% unless @user.microposts.empty? %> 
     <ul class="styleless">
       <%= render @microposts %>

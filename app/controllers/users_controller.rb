@@ -8,6 +8,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @title = @user.name
     @microposts = @user.microposts.paginate(:page => params[:page])
+    if signed_in?
+      @micropost = Micropost.new
+    end   
   end
   
   def new
