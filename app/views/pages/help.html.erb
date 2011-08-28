@@ -1,4 +1,29 @@
 <div class="column span-21 main">
-<h1>Help</h1>
-<p>Please don't hesitate to ask for help! If in doubt, Google for Ruby on Rails tutorials and read.</p>
+  <h1>Help</h1>
+  <p>If you can't find the help you want here, please <%= link_to "contact me", 
+      contact_path %>.</p>
+  <h3>Home</h3>
+  <p>Your home page is where you can update the babble community on your current 
+    status via the creation of a micropost. It is also where your status feed is.
+  </p>
+  <h3>Status Feed</h3>
+  <p>Your status feed is where you can see your past microposts as well as the 
+    microposts of the people whom you have followed.</p>
+  <h3>Users</h3>
+  <p>The users page contains a list of all the users currently signed up with 
+    babble. From this page, you can proceed to each user's profile page by clicking
+    on their name.
+  </p>
+  <h3>Profile</h3>
+  <p>Clicking on the follow/unfollow button on each user's page will allow you to 
+    follow/unfollow that user. If you happen to be on your own profile page, you
+    can use the micropost creation form to add new microposts.
+    
+    The sidebar on a user's profile page also shows the number of people that the user
+    is currently following as well as the number of people currently following that user.
+    Clicking on either number will direct you to the Followers/Following page.    
+  </p>
+  <h3>Followers/Following</h3>
+  <p>This is a listing of users who are either followers of a certain user or are
+  being followed by a certain user</p>
 </div>
