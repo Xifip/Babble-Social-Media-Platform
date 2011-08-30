@@ -41,8 +41,8 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("li>div>div>h3", :content => mp1.content )
       response.should have_selector("li>div>div>h3", :content => mp2.content )      
-    end
-    
+    end   
+       
   end
   
   describe "GET 'new'" do
@@ -414,8 +414,15 @@ describe UsersController do
         response.should have_selector("a", :href => user_path(@user), :content => @user.name)
       end
       
+      it "should show the follwed user's posts, but not have a delete link for them" do
+        mp = Factory( :micropost, :user => @other_user, :content => "someone else's
+        post")
+        get :show, :id => @user
+        response.should_not have_selector("li>div>a", :content => "delete" ) 
+      end
     end
-    
+      
   end
-
+    
 end
+
