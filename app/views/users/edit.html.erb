@@ -1,17 +1,19 @@
 <div class="column span-21 main">
   <h1>Edit</h1>
 
+  <div>
+    <%= gravatar_for @user %>
+    <a href="http://gravatar.com/emails" target="_blank">change</a>
+  </div>
+  <br/>
+
   <%= form_for(@user) do |f| %>
 
     <%= render 'basic_user_fields', :f => f %>
 
     <div class="actions">
-      <%= f.submit "Update" %>
+      <%= f.submit "Update", :class => "button round" %>
     </div>
   <% end %>
 
-  <div>
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails" target="_blank">change</a>
-  </div>
 </div>

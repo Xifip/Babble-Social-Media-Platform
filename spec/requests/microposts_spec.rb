@@ -18,7 +18,7 @@ describe "Microposts" do
         lambda do
           visit root_path
           fill_in :micropost_content, :with => ""
-          click_button
+          submit_form 'new_micropost'
           response.should render_template('pages/home')
           response.should have_selector("div#error_explanation")
         end.should_not change(Micropost, :count)
@@ -31,7 +31,7 @@ describe "Microposts" do
         lambda do
           visit root_path
           fill_in :micropost_content, :with => "Some randomness"
-          click_button
+          submit_form 'new_micropost'
           response.should have_selector("li>div>div>h4", :content => "Some randomness")          
         end.should change(Micropost, :count).by(1)        
       end

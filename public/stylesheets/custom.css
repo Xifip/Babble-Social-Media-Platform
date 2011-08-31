@@ -31,6 +31,21 @@ input.noborder {
     border: none;
 }
 
+input.button {
+    display: block;
+    text-align: center;
+    width: 100px;
+    color: #111;
+    background: #eee;
+    font-size: 104%;    
+    border: 1px solid #ccc;
+}
+
+input.button:disabled {
+    color: #fff;
+    border: 1px solid #ddd;
+}
+
 ul.styleless {
     list-style:none;
 }
@@ -239,32 +254,6 @@ h1.micropost {
     margin-bottom: 0.3em;
 }
 
-table.microposts {
-    margin-top: 1em;
-}
-
-table.microposts tr {
-    height: 70px;
-}
-
-table.microposts tr td.gravatar {
-    border-top: 1px solid #ccc;
-    vertical-align: top;
-    width: 50px;
-}
-
-table.microposts tr td.micropost {
-    border-top: 1px solid #ccc;
-    vertical-align: top;
-    padding-top: 10px;
-}
-
-table.microposts tr td.micropost span.timestamp {
-    display: block;
-    font-size: 85%;
-    color: #666;
-}
-
 div.user_info img {
     padding-right: 0.1em;
 }
@@ -282,13 +271,25 @@ div.user_info span.microposts {
 }
 
 form.new_micropost {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 form.new_micropost textarea {
-    height: 4em;
+    height: 1.6em;
+    width: 595px;
     margin-bottom: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 109%;
 }
+
+form.new_micropost textarea::-webkit-input-placeholder {
+    color:    #999;
+}
+
+form.new_micropost textarea:-moz-placeholder {
+    color:    #999;
+}
+
 
 #micropostLengthCount {
     color: #333;
@@ -317,9 +318,4 @@ li.feed_line {
 
 .feed_item_create_date {
     font-size: 70%;
-}
-
-.micropost_input{
-    width: 600px;
-    font-family: Helvetica, Arial, sans-serif;
 }
