@@ -42,7 +42,7 @@ input.button {
 }
 
 input.button:disabled {
-    color: #fff;
+    color: #888;
     border: 1px solid #ddd;
 }
 

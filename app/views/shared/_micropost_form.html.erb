@@ -1,39 +1,19 @@
-<script>
-  function textCounter(textarea, countdown, maxlimit)
-{
-  textareaid = document.getElementById(textarea);
-  if (textareaid.value.length > maxlimit)
-    textareaid.value = textareaid.value.substring(0, maxlimit);
-  else{
-    document.getElementById(countdown).value = '  ('+(maxlimit-textareaid.value.length)+' characters left)';
-    if (textareaid.value.length > 0)
-      document.getElementById("micropost_submit").disabled = false;
-    else
-      document.getElementById("micropost_submit").disabled = true;
-  }
-    
-}
-</script>
-<script>
-function enlargeTextArea(){
-  document.getElementById('micropost_content').style.height = "5em";    
-}
-</script>
+<%= javascript_include_tag "micropost.js"  %>
 
 <%= form_for @micropost do |f| %>
   <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.text_area :content, 
-      :onKeyDown => "textCounter('micropost_content', 'micropostLengthCount', 200)",
-      :onKeyUp => "textCounter('micropost_content', 'micropostLengthCount', 200)",
+      :onKeyDown => "textInputAction()",
+      :onKeyUp => "textInputAction()",
       :onFocus => "enlargeTextArea()",
       :placeholder => "Share your thoughts",
       :autocomplete => "off"
   %>
 
   </div>
-  <div class="actions left">
-    <%= f.submit "Submit", :class => "button round", :disabled => "true", :autocomplete => "off" %>
+  <div id="submitbutton" class="hide actions left">
+    <%= f.submit "Submit", :class => "hide button round", :autocomplete => "off" %>
   </div>
   <div class="right">
     <input id="micropostLengthCount" readonly type="text" class="noborder" autocomplete="off"/>
