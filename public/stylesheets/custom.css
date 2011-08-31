@@ -46,6 +46,10 @@ input.button:disabled {
     border: 1px solid #ddd;
 }
 
+input.button:active {
+    background: #ddd;
+}
+
 ul.styleless {
     list-style:none;
 }
