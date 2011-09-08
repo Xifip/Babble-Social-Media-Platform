@@ -72,7 +72,24 @@ describe Micropost do
     it "should not contain the posts of someone not being followed" do
       Micropost.from_users_followed_by(@user).should_not include(@third_post)
     end
+  end
+  
+  describe "likes" do
+    
+    before(:each) do
+      @micropost = @user.microposts.create(@attr)
+    end
+    
+    it "should respond to a call to likes method" do
+      @micropost.should respond_to(:likes)
+    end
+    
+    it "should respond to a call to the likers method" do
+      @micropost.should respond_to(:likers)
+    end   
+    
     
     
   end
+  
 end

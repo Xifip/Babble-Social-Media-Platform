@@ -35,6 +35,11 @@ class User < ActiveRecord::Base
     "Relationship", :dependent => :destroy
   has_many :followers, :through => :reverse_relationships, :source => :follower
   
+  #likes
+  has_many :likes, :foreign_key => "liker_id", :dependent => :destroy
+  has_many :posts_i_like, :through => :likes, :source => :liked, 
+    :class_name => "Micropost"
+  
   #---Validations---
   
   #email regular expression to make sure emails are of valid format
@@ -78,6 +83,18 @@ class User < ActiveRecord::Base
   
   def unfollow!(followed)
     relationships.find_by_followed_id(followed).destroy
+  end
+  
+  def liking?(liked)
+    likes.find_by_liked_id(liked)
+  end
+  
+  def like!(liked)
+    likes.create!(:liked_id => liked.id)
+  end
+  
+  def unlike!(liked)
+    likes.find_by_liked_id(liked).destroy
   end
   
   private

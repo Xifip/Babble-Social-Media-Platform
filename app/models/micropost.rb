@@ -7,6 +7,11 @@ class Micropost < ActiveRecord::Base
   
   belongs_to :user
   
+  #likes
+  has_many :likes, :foreign_key => "liked_id", :dependent => :destroy
+  has_many :likers, :through => :likes, :source => :liker, 
+    :class_name => "User"
+  
   default_scope :order => 'microposts.created_at DESC'
   
   scope :from_users_followed_by, lambda { |user| followed_by(user)}

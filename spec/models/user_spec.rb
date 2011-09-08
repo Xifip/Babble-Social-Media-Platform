@@ -288,5 +288,60 @@ describe User do
     
   end    
   
+  describe "likes" do
+    
+    before(:each) do
+      @user = User.create!(@attr)
+      @user2 = Factory(:user)
+      @attr = { :content => "value for content" }
+      @micropost = @user2.microposts.create(@attr)
+    end
+    
+    it "should have a likes method" do
+      @user.should respond_to(:likes)
+    end
+    
+    it "should have a posts_i_like method" do
+      @user.should respond_to(:posts_i_like)
+    end
+    
+    it "should have each posts_i_like as a micropost class" do
+      @user.posts_i_like.each do |item|
+        item.class.name.should == "Micropost"  
+      end      
+    end
+    
+    it "should have a liking? method" do
+      @user.should respond_to(:liking?)
+    end
+    
+    it "should have a like! method" do
+      @user.should respond_to(:like!)
+    end
+    
+    it "should like a post" do
+      @user.like!(@micropost)
+      @user.should be_liking(@micropost)
+    end
+    
+    it "should include the liked post in the posts_i_like array" do
+      @user.like!(@micropost)
+      @user.posts_i_like.should include(@micropost)
+    end
+    
+    it "should have an unlike! method" do
+      @user.should respond_to(:unlike!)      
+    end
+    
+    it "should unlike a post" do
+      @user.like!(@micropost)
+      @user.unlike!(@micropost)
+      @user.should_not be_liking(@micropost)
+    end
+    
+    
+    
+  end
+  
   
 end
