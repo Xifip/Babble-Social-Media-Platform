@@ -41,8 +41,8 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector("li>div>div>h3", :content => mp1.content )
       response.should have_selector("li>div>div>h3", :content => mp2.content )      
-    end   
-       
+    end
+               
   end
   
   describe "GET 'new'" do
