@@ -41,7 +41,7 @@ describe Like do
     it "should require a liked_id" do
       @like.liked_id = nil
       @like.should_not be_valid
-    end
+    end    
   end
   
 end

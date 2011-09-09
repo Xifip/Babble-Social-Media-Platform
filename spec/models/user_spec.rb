@@ -339,6 +339,16 @@ describe User do
       @user.should_not be_liking(@micropost)
     end
     
+    it "should destroy associated likes when a user is deleted" do
+      @user.like!(@micropost)
+      @likes_by_user = Like.find_all_by_liker_id(@user.id)
+      @user.destroy
+      @likes_by_user.each do |like_instance|
+        Like.find_by_id(like_instance.id).should be_nil
+      end
+      
+    end
+    
     
     
   end

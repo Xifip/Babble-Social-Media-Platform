@@ -16,6 +16,10 @@ class Micropost < ActiveRecord::Base
   
   scope :from_users_followed_by, lambda { |user| followed_by(user)}
   
+  def likes_count 
+    likes.count
+  end
+  
   private
   
   # Return an SQL condition for users followed by the given user. 
