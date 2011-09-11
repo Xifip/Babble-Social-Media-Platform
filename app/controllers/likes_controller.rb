@@ -5,17 +5,19 @@ class LikesController < ApplicationController
   
   def create
     @micropost = Micropost.find(params[:like][:liked_id])
-    @this_user = User.find_by_id(@micropost.user_id)
-    current_user.like!(@micropost)
-    respond_with @this_user
     
+    current_user.like!(@micropost)
+    
+    likes_controller_response
+        
   end
   
   def destroy
     @micropost = Like.find(params[:id]).liked
-    @this_user = User.find_by_id(@micropost.user_id)
+    
     current_user.unlike!(@micropost)
-    respond_with @this_user
+    
+    likes_controller_response
   end
   
 end

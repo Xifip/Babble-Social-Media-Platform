@@ -3,7 +3,7 @@
   <div class="span-2 feed_photo">
     <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   </div>
-  <div class="wrap span-11">
+  <div class="wrap span-10">
     <div>
       <%= link_to feed_item.user.name, feed_item.user %>
     </div>
@@ -25,6 +25,24 @@
         :confirm => "You sure?",
         :title => feed_item.content %>
     </div>
+  <% end %>
+  
+  <% user = feed_item.user rescue User.find(feed_item.user_id) %>
+  <% if current_user?(user) %>
+
+    <% unless feed_item.likes_count == 0 %>
+      <div id="like_count_<%= feed_item.id %>" class="right small">
+        <%= pluralize(feed_item.likes_count, "Like") %>&nbsp &nbsp
+      </div>
+    <% end %>
+
+  <% else %>
+
+    <div class="span-2 small right">
+      <%= render 'microposts/like_form', :micropost => feed_item %>
+    </div>
+
+
   <% end %>
 
 
