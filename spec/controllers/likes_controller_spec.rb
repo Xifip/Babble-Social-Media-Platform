@@ -29,6 +29,13 @@ describe LikesController do
         response.should be_redirect
       end.should change(Like, :count).by(1)
     end
+    
+    it "should create a like using AJAX" do
+      lambda do
+        xhr :post, :create, :like => { :liked_id => @micropost }
+        response.should be_success
+      end.should change(Like, :count).by(1)
+    end
         
   end
 
@@ -45,6 +52,13 @@ describe LikesController do
       lambda do
         delete :destroy, :id => @like
         response.should be_redirect
+      end.should change(Like, :count).by(-1)
+    end
+    
+    it "should destroy a like using AJAX" do
+      lambda do
+        xhr :delete, :destroy, :id => @like
+        response.should be_success
       end.should change(Like, :count).by(-1)
     end
         

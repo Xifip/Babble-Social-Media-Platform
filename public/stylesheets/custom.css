@@ -50,6 +50,33 @@ input.button:active {
     background: #ddd;
 }
 
+input.button:hover {
+    border: 1px solid #bbb;
+}
+
+
+input.button:disabled:hover {
+    border: 1px solid #ddd;
+}
+
+input.likeButton {
+    color:#0088ee;
+    padding:0px;
+    font-family:Calibri, Arial, Helvetica, sans-serif;
+    background:none;
+    border: none;
+    display:block;
+    font-size: 104%;
+    text-align: right;
+    width: 100%;
+}
+
+input.likeButton:hover {
+    text-decoration: underline;
+}
+
+
+
 ul.styleless {
     list-style:none;
 }

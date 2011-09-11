@@ -1,0 +1,5 @@
+<%= form_for current_user.likes.find_by_liked_id(micropost), 
+  :html => { :method => :delete }, :remote => true do |f|%>
+  <div class="actions"><%= f.submit "#{likes_text_for(micropost)}", 
+  :class => "likeButton", :title => "Unlike this post"%></div>
+<% end %>

@@ -1,0 +1,1 @@
+$("like_action_<%= @micropost.id %>").update("<%= escape_javascript(render(:partial => "microposts/like", :locals => {:micropost => @micropost} )) %>")

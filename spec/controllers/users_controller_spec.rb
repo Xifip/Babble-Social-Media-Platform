@@ -38,6 +38,7 @@ describe UsersController do
     it "should show the microposts collection for the user" do
       mp1 = Factory( :micropost, :user => @user, :content => "first post" )
       mp2 = Factory( :micropost, :user => @user, :content => "second post" )
+      test_sign_in @user
       get :show, :id => @user
       response.should have_selector("li>div>div>h3", :content => mp1.content )
       response.should have_selector("li>div>div>h3", :content => mp2.content )      
