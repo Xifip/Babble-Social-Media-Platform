@@ -1,6 +1,6 @@
 # Babble - A basic Social Media platform
 
-Copyright (c) 2010 Lloyd Chan
+Copyright (c) 2011 Lloyd Chan
 
 This is basic Social Media platform by Lloyd Chan.  It is a project created by customising Mihael Hartl's basic Twitter clone.  Anyone interested in using this code or adding to it should do so :)
 
