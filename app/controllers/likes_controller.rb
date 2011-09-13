@@ -10,8 +10,7 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to request.referrer}
       format.js
-    end        
-        
+    end                
   end
   
   def destroy
@@ -22,8 +21,7 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to request.referrer}
       format.js
-    end        
-    
+    end            
   end
   
 end
