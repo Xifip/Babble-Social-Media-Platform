@@ -41,15 +41,6 @@ module SessionsHelper
     !current_user.nil?
   end
   
-  def likes_controller_response
-    if (URI.split(request.referrer)[5] == "/")
-      respond_with current_user
-    else
-      @this_user = User.find_by_id(@micropost.user_id)
-      respond_with @this_user
-    end
-  end
-  
   private
   
   def store_location

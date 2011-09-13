@@ -1,14 +1,16 @@
 class LikesController < ApplicationController
   
   before_filter :authenticate  
-  respond_to :html, :js
-  
+    
   def create
     @micropost = Micropost.find(params[:like][:liked_id])
     
     current_user.like!(@micropost)
     
-    likes_controller_response
+    respond_to do |format|
+      format.html { redirect_to request.referrer}
+      format.js
+    end        
         
   end
   
@@ -17,7 +19,11 @@ class LikesController < ApplicationController
     
     current_user.unlike!(@micropost)
     
-    likes_controller_response
+    respond_to do |format|
+      format.html { redirect_to request.referrer}
+      format.js
+    end        
+    
   end
   
 end
