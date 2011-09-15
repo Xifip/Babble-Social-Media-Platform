@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   end
   
   def create
-    logger.info "params list #{params[:user]}"
     
     # Temporary fix to allow json requests to always create a new user
     if signed_in? and ! request.format.json?
@@ -32,8 +31,8 @@ class UsersController < ApplicationController
       @user = User.new(params[:user])
     
       if @user.save
+        
         sign_in @user
-        logger.info "successfully signed in"
         
         flash[:success] = "welcome to babble !"        
         respond_to do |format|
@@ -52,7 +51,20 @@ class UsersController < ApplicationController
         @user.password = ""
         @user.password_confirmation = ""
         @title = "Sign Up"
-        render 'new'
+                
+        respond_to do |format|
+
+          format.html {
+            render 'new'
+          }
+
+          format.json  {
+            render :json => {:action =>'signup', 
+              :error=> "sign up failed, please check your email to make sure it 
+              hasn't already been used"}  
+          }
+        end
+        
       end    
     end      
   end

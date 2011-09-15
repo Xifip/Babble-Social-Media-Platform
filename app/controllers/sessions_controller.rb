@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
           redirect_back_or root_path
         }
         format.json  {
-          render :json => {  :action =>'login', :owner => current_user  }
+          render :json => { :action =>'login', :owner => current_user  }
         }
       end     
       

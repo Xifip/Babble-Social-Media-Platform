@@ -105,6 +105,18 @@ describe UsersController do
         response.should render_template('new')
       end
       
+      it "should should have an error in the body of a JSON response" do
+        post :create, :user => @attr, :format => :json
+        body = JSON.parse(response.body)
+        body["error"].should be_present
+        body["error"].should =~ /sign up failed/i
+      end
+      
+      it "not provide a cookie if the JSON request failed to create a user" do
+        post :create, :user => @attr, :format => :json
+        response.headers["Set-Cookie"].should_not be_present
+      end
+      
     end
     
     describe "success" do
@@ -132,6 +144,18 @@ describe UsersController do
       it "should sign the user in" do
         post :create, :user => @attr
         controller.should be_signed_in
+      end
+      
+      it "should create a user using JSON" do
+        lambda do
+          post :create, :user => @attr, :format => :json
+        end.should change(User, :count).by(1)
+      end
+      
+      it "should create a user and provided a cookie in response to successful JSON create" do
+        post :create, :user => @attr, :format => :json
+        response.should be_success
+        response.headers["Set-Cookie"].should be_present
       end
       
     end
@@ -320,8 +344,8 @@ describe UsersController do
         response.should have_selector("a", :content => "delete")        
       end
       
-    end
-    
+    end   
+       
   end
   
   describe "DELETE 'destroy'" do

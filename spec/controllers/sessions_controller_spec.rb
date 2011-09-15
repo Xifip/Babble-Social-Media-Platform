@@ -41,6 +41,18 @@ describe SessionsController do
         flash.now[:error].should =~ /invalid/i
       end
       
+      it "should should have an error in the body of a JSON response" do
+        post :create, :session => @attr, :format => :json
+        body = JSON.parse(response.body)
+        body["error"].should be_present
+        body["error"].should =~ /invalid user or email/i
+      end
+      
+      it "should not provide a cookie if the JSON request failed to create a session" do
+        post :create, :session => @attr, :format => :json
+        response.headers["Set-Cookie"].should_not be_present
+      end
+      
     end   
     
     describe "valid sign in" do
@@ -59,6 +71,12 @@ describe SessionsController do
       it "should redirect to the user to the user show page" do
         post :create, :session => @attr
         response.should redirect_to(root_path)
+      end
+      
+      it "should sign a user in using JSON by providing a cookie" do
+        post :create, :session => @attr, :format => :json
+        response.should be_success
+        response.headers["Set-Cookie"].should be_present
       end
       
     end
