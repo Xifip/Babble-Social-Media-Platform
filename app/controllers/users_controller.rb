@@ -16,23 +16,38 @@ class UsersController < ApplicationController
   def new
     if signed_in?
       redirect_to root_path
-    else
+    else      
       @user = User.new
-      @title = "Sign Up"
-    end
-    
+      @title = "Sign Up"      
+    end    
   end
   
   def create
-    if signed_in?
-      redirect_to root_path
+    logger.info "params list #{params[:user]}"
+    
+    # Temporary fix to allow json requests to always create a new user
+    if signed_in? and ! request.format.json?
+      redirect_to root_path      
     else
       @user = User.new(params[:user])
     
       if @user.save
         sign_in @user
-        flash[:success] = "welcome to babble !"
-        redirect_to @user
+        logger.info "successfully signed in"
+        
+        flash[:success] = "welcome to babble !"        
+        respond_to do |format|
+                 
+          format.html {          
+            redirect_to @user          
+          }
+        
+          format.json { 
+            render :json => {:action =>'create', :owner => @user }          
+          }
+          
+        end
+        
       else
         @user.password = ""
         @user.password_confirmation = ""
@@ -59,7 +74,12 @@ class UsersController < ApplicationController
   
   def index
     @title = "Users"
-    @users = User.paginate(:page => params[:page])
+    respond_to do |format|
+      format.html { render :html => @users = User.paginate(:page => params[:page])}
+      format.xml { render :xml => @users = User.all}
+      format.json { render :json => { :items => User.all}}      
+    end
+    
   end
   
   def destroy
