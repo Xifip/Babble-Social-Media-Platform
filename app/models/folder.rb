@@ -2,7 +2,7 @@ class Folder < ActiveRecord::Base
   
   acts_as_tree
   
-  attr_accessible :name
+  attr_accessible :name, :parent
   
   belongs_to :user  
   has_many :messages, :class_name => "MessageCopy"

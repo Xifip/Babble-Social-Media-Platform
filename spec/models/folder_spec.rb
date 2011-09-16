@@ -57,4 +57,16 @@ describe Folder do
     
   end
   
+  describe "folder nesting" do
+    
+    before(:each) do
+      @subFolder = @user.folders.create!(@attr.merge(:parent => @user.inbox))
+    end
+    
+    it "should have the right parent folder" do
+      @subFolder.parent.should == @user.inbox
+    end
+    
+  end
+  
 end
