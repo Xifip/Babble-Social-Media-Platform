@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110907234222) do
+ActiveRecord::Schema.define(:version => 20110915235633) do
+
+  create_table "folders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "likes", :force => true do |t|
     t.integer  "liker_id"
@@ -22,6 +30,22 @@ ActiveRecord::Schema.define(:version => 20110907234222) do
   add_index "likes", ["liked_id"], :name => "index_likes_on_liked_id"
   add_index "likes", ["liker_id", "liked_id"], :name => "index_likes_on_liker_id_and_liked_id", :unique => true
   add_index "likes", ["liker_id"], :name => "index_likes_on_liker_id"
+
+  create_table "message_copies", :force => true do |t|
+    t.integer  "recipient_id"
+    t.integer  "message_id"
+    t.integer  "folder_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.integer  "author_id"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "microposts", :force => true do |t|
     t.string   "content"

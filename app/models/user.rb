@@ -40,6 +40,11 @@ class User < ActiveRecord::Base
   has_many :posts_i_like, :through => :likes, :source => :liked, 
     :class_name => "Micropost"
   
+  #messages
+  has_many :sent_messages, :class_name => "Message", :foreign_key => "author_id"
+  has_many :received_messages, :class_name => "MessageCopy", :foreign_key => "recipient_id"
+  has_many :folders
+  
   #---Validations---
   
   #email regular expression to make sure emails are of valid format
@@ -50,6 +55,8 @@ class User < ActiveRecord::Base
   
   # Validation for the virtual password; password_confirmation validation is automatically created
   validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }
+  
+  before_create :build_inbox
   
   before_save :encrypt_password
   
@@ -97,6 +104,11 @@ class User < ActiveRecord::Base
     likes.find_by_liked_id(liked).destroy
   end
   
+  def inbox
+    @inboxFolder = folders.find_by_name("Inbox")
+    @inboxFolder ||= folders.build(:name => "Inbox")    
+  end
+  
   private
   
     def encrypt_password
@@ -114,5 +126,9 @@ class User < ActiveRecord::Base
         
     def encrypt(string)
       secure_hash("#{salt}--#{string}")
+    end
+    
+    def build_inbox
+      folders.build(:name => "Inbox")
     end
 end
