@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
   
   def correct_user
     @user = MessageCopy.find(params[:id]).recipient
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to request.referrer  unless current_user?(@user)
   end
   
 

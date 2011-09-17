@@ -66,5 +66,42 @@ describe LikesController do
         
   end
   
+  describe "invalid liking and unliking" do
+    
+    before(:each) do
+      @user = Factory(:user)
+      @user2 = Factory(:user, :email => Factory.next(:email))
+      @user3 = Factory(:user, :email => Factory.next(:email))
+      @micropost = Factory( :micropost, :user => @user, :content => "post" )         
+    end
+    
+    it "should not allow a user to like their own posts" do
+      lambda do
+        test_sign_in(@user)
+        post :create, :like => { :liked_id => @micropost }
+      end.should_not change(Like, :count)      
+    end
+    
+    it "should not allow a user to unlike their own posts" do
+      @user2.like!(@micropost)
+      @like = @user2.likes.find_by_liked_id(@micropost)
+      test_sign_in(@user)
+      lambda do
+        delete :destroy, :id => @like
+        response.should be_redirect
+      end.should_not change(Like, :count)
+    end
+    
+    it "should not allow a user to delete someone else's like" do
+      
+      @user2.like!(@micropost)
+      @like = @user2.likes.find_by_liked_id(@micropost)
+      test_sign_in(@user3)
+      lambda do
+        delete :destroy, :id => @like
+        response.should be_redirect
+      end.should_not change(Like, :count)
+    end
+  end
 end
 

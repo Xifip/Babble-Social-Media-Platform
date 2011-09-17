@@ -28,7 +28,7 @@ class MailboxController < ApplicationController
   
   def correct_user
     @user = Folder.find(params[:id]).user
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to request.referrer  unless current_user?(@user)
   end
   
 end
