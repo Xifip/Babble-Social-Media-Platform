@@ -41,6 +41,19 @@ describe SentController do
     
   end
   
+  describe "for wrong users" do
+    
+    before(:each) do
+      @user1_message = @user.sent_messages.create(@message_attr)      
+      @anoter_user = test_sign_in(Factory(:user, :email => Factory.next(:email)))      
+    end
+    
+    it "should not be able to see someone else's sent messages" do
+      get 'show', :id => @user1_message
+      response.should_not be_success
+    end
+    
+  end
   
   describe "GET 'show'" do
     

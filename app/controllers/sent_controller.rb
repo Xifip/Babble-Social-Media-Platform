@@ -1,6 +1,7 @@
 class SentController < ApplicationController
     
   before_filter :authenticate   
+  before_filter :correct_user, :only => [ :show ]
   
   def index
     @title = "Sent Messages"
@@ -29,6 +30,13 @@ class SentController < ApplicationController
       render :action => "new"
     end
     
+  end
+  
+  private
+  
+  def correct_user
+    @user = Message.find(params[:id]).author
+    redirect_to(root_path) unless current_user?(@user)
   end
 
 end

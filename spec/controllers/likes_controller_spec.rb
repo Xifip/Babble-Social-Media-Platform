@@ -19,10 +19,11 @@ describe LikesController do
   describe "POST 'create'" do
 
     before(:each) do
-      @user = test_sign_in(Factory(:user))
+      @user = Factory(:user)
+      test_sign_in(Factory(:user, :email => Factory.next(:email)))
       @micropost = Factory( :micropost, :user => @user, :content => "post" )      
     end
-
+    
     it "should create a like" do
       lambda do
         post :create, :like => { :liked_id => @micropost }
@@ -42,10 +43,11 @@ describe LikesController do
   describe "DELETE 'destroy'" do
 
     before(:each) do
-      @user = test_sign_in(Factory(:user))
+      @user = Factory(:user)
+      @user2 = test_sign_in(Factory(:user, :email => Factory.next(:email)))
       @micropost = Factory( :micropost, :user => @user, :content => "post" )   
-      @user.like!(@micropost)
-      @like = @user.likes.find_by_liked_id(@micropost)
+      @user2.like!(@micropost) 
+      @like = @user2.likes.find_by_liked_id(@micropost)
     end
 
     it "should destroy a like" do
@@ -63,8 +65,6 @@ describe LikesController do
     end
         
   end
-  
-  
   
 end
 
