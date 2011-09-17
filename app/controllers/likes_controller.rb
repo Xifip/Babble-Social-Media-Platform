@@ -18,18 +18,12 @@ class LikesController < ApplicationController
   def destroy
     @micropost = Like.find(params[:id]).liked
     
-    begin
-      current_user.unlike!(@micropost)  
+    current_user.unlike!(@micropost)  
 
-    rescue
-      redirect_to request.referrer 
-    
-    else
-      respond_to do |format|
-        format.html { redirect_to request.referrer}
-        format.js
-      end
-    end
+    respond_to do |format|
+      format.html { redirect_to request.referrer}
+      format.js
+    end    
     
   end
   
@@ -41,8 +35,8 @@ class LikesController < ApplicationController
   end
   
   def allowed_to_unlike
-    @user = Micropost.find(params[:id]).user
-    redirect_to request.referrer  if current_user?(@user)
+    @likes_user = Like.find(params[:id]).liker
+    redirect_to request.referrer unless current_user?(@likes_user)
   end
   
 end
