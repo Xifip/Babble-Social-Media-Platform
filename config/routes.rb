@@ -1,5 +1,15 @@
 Babble::Application.routes.draw do
   
+  get "mailbox/show"
+
+  get "messages/show"
+
+  get "sent/index"
+
+  get "sent/show"
+
+  get "sent/new"
+
   resources :users do
     
     # allows HTTP request of GET to /users/1/following and /users/1/followers
@@ -13,6 +23,9 @@ Babble::Application.routes.draw do
   resources :microposts, :only => [ :create, :destroy ]
   resources :relationships, :only => [ :create, :destroy ]
   resources :likes, :only => [ :create, :destroy ]
+  resources :sent, :only => [ :show, :index, :new, :create]
+  resources :messages, :only => [ :show, :index ]
+  resources :mailbox, :only => [ :show, :index ]
   
 
   match '/signup', :to => 'users#new'
