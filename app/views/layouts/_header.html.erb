@@ -2,17 +2,46 @@
   <%= link_to logo, root_path %>
   <nav>
     <ul>
-      <li><%= link_to "Home", root_path %></li>
+
+      <li><%=  link_to_unless_current("Home", root_path, ()) do
+          link_to("Home", root_path, :class => "current_path") end%>
+      </li>
+
       <% if signed_in? %>
-        <li><%= link_to "Users", users_path %></li>
-        <li><%= link_to "Profile", current_user %></li>
-        <li><%= link_to "Settings", edit_user_path(current_user) %>
+
+        <li><%=  link_to_unless_current("Users", users_path, ()) do
+            link_to("Users", users_path, :class => "current_path") end%>
+        </li>
+
+        <li><%=  link_to_unless_current("Profile", current_user, ()) do
+            link_to("Profile", current_user, :class => "current_path") end%>
+        </li>
+
+        <li><%= link_to_if(
+            current_page?(inbox_path) || current_page?(new_sent_path) || current_page?(:controller =>'sent', :action => 'show') , 
+            "Messages", inbox_path, :class => "current_path") do
+            link_to("Messages", inbox_path) end%>
+        </li>
+
+        <li><%=  link_to_unless_current("Settings", edit_user_path(current_user), ()) do
+            link_to("Settings", edit_user_path(current_user), :class => "current_path") end%>
+        </li>
+
+
       <% end %>
-      <li><%= link_to "Help", help_path  %></li>
+
+      <li><%=  link_to_unless_current("Help", help_path, ()) do
+          link_to("Help", help_path, :class => "current_path") end%>
+      </li>
+
       <% if signed_in? %>
         <li><%= link_to "Sign out", signout_path, :method => :delete %>
         <% else %>
-        <li><%= link_to "Sign in", signin_path %></li>
+
+        <li><%=  link_to_unless_current("Sign in", signin_path, ()) do
+            link_to("Sign in", signin_path, :class => "current_path") end%>
+        </li>
+
       <% end %>
     </ul>
   </nav> 

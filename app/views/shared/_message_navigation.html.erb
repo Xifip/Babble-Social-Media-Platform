@@ -1,0 +1,17 @@
+<ul class="mail_navigation">
+
+  <li><%=  link_to_unless_current("New", new_sent_path, ()) do
+      link_to("New", new_sent_path, :class => "current_path") end%>
+  </li>
+
+  <li><%= link_to_unless_current("Inbox", inbox_path, ()) do
+      link_to("Inbox", inbox_path, :class => "current_path") end %>
+  </li>
+
+  <li><%= link_to_if(current_page?(:controller =>'sent', :action => 'show'), "Sent", sent_path, :class => "current_path") do
+      link_to("Sent", sent_path) end %>
+  </li>
+
+</ul>
+
+<br/>

@@ -1,16 +1,6 @@
 Babble::Application.routes.draw do
   
-  get "mailbox/show"
-
-  get "messages/show"
-
-  get "sent/index"
-
-  get "sent/show"
-
-  get "sent/new"
-
-  resources :users do
+   resources :users do
     
     # allows HTTP request of GET to /users/1/following and /users/1/followers
     # ie. for members of users, allow for the getting through these urls
@@ -23,19 +13,24 @@ Babble::Application.routes.draw do
   resources :microposts, :only => [ :create, :destroy ]
   resources :relationships, :only => [ :create, :destroy ]
   resources :likes, :only => [ :create, :destroy ]
-  resources :sent, :only => [ :show, :index, :new, :create]
-  resources :messages, :only => [ :show, :index ]
-  resources :mailbox, :only => [ :show, :index ]
+  resources :sent, :only => [ :index, :new, :create ]
+  resources :messages, :only => [ :index, :show ]
+  resources :mailbox, :only => [ :index, :show ]
   
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-
+  
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-    
+
+  match "inbox" => "mailbox#index" 
+  match "sent" => "sent#index"
+  match "/sent/:id" => "sent#show", :as => :sent_message
+  match "sent" => "sent#show"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

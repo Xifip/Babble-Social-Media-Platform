@@ -142,6 +142,10 @@ nav ul li a {
     font-weight: bold;
 }
 
+nav ul li a.current_path {
+    border-bottom: 3px solid #0088ee; 
+}
+
 nav ul li a:visited {
     color: #0088ee;
 }
@@ -349,4 +353,50 @@ li.feed_line {
 
 .feed_item_create_date {
     font-size: 70%;
+}
+
+/* Mail navigation */
+
+ul.mail_navigation {
+    font-size: 150%;
+}
+
+
+ul.mail_navigation {
+    background-color: white;
+
+    white-space: nowrap;
+}
+
+ul.mail_navigation {
+    margin: 0;
+    padding: 0;
+}
+
+ul.mail_navigation li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 0.2em 0.7em;
+}
+
+ul.mail_navigation li.current_path {
+    border-bottom: 3px solid #0088ee; 
+}
+
+ul.mail_navigation li a {
+    padding: 0 5px;
+    font-weight: bold;
+}
+
+ul.mail_navigation li a.current_path {
+    border-bottom: 3px solid #0088ee; 
+}
+
+
+ul.mail_navigation li a:visited {
+    color: #0088ee;
+}
+
+ul.mail_navigation li a:hover {
+    text-decoration: none;
 }

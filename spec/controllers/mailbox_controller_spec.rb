@@ -26,7 +26,7 @@ describe MailboxController do
     end      
     
     it "should deny access to 'show'" do
-      get :show
+      get :show, :id => 1
       response.should redirect_to(signin_path)
       flash[:notice].should =~ /sign in/i
     end      

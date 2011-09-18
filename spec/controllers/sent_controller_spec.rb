@@ -22,7 +22,7 @@ describe SentController do
     end      
     
     it "should deny access to 'show'" do
-      get :show
+      get :show, :id => 1
       response.should redirect_to(signin_path)
       flash[:notice].should =~ /sign in/i
     end      
@@ -126,9 +126,9 @@ describe SentController do
       get :index
       response.should have_selector("div.pagination")
       response.should have_selector("span.disabled", :content => "Previous")
-      response.should have_selector("a", :href => "/sent/index?page=2",
+      response.should have_selector("a", :href => "/sent?page=2",
         :content => "2")
-      response.should have_selector("a", :href => "/sent/index?page=2",
+      response.should have_selector("a", :href => "/sent?page=2",
         :content => "Next")
     end
           
