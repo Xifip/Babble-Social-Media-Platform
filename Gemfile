@@ -13,6 +13,8 @@ gem 'will_paginate', '3.0.pre2'
 
 gem 'acts_as_tree'
 
+gem "omniauth"
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
