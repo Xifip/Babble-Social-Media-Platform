@@ -17,6 +17,7 @@ Babble::Application.routes.draw do
   resources :messages, :only => [ :index, :show ]
   resources :mailbox, :only => [ :index, :show ]
   
+  match "/auth/:provider/callback" => "sessions#create_from_auth"
 
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'

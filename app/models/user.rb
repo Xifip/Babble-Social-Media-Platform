@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   before_create :build_inbox
   
   before_save :encrypt_password
-  
+    
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
     return nil if user.nil?
@@ -107,28 +107,42 @@ class User < ActiveRecord::Base
   def inbox
     @inboxFolder = folders.find_by_name("Inbox")
     @inboxFolder ||= folders.build(:name => "Inbox")    
+  end  
+  
+  def self.create_with_omniauth(auth)
+    
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.name = auth["user_info"]["nickname"]
+      user.email = auth["user_info"]["name"].gsub(/\s+/, "") << "@fromTwitter.com"
+      user.twitter_img_url = auth["user_info"]["image"]
+      user.password = auth["uid"][0..40]
+      
+    end
   end
+
   
   private
   
-    def encrypt_password
-      self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password)
-    end
+  def encrypt_password
+    self.salt = make_salt if new_record?
+    self.encrypted_password = encrypt(password)
+  end
     
-    def make_salt
-      secure_hash("#{Time.now.utc}--#{password}")
-    end
+  def make_salt
+    secure_hash("#{Time.now.utc}--#{password}")
+  end
     
-    def secure_hash(string)
-      Digest::SHA2.hexdigest(string)
-    end
+  def secure_hash(string)
+    Digest::SHA2.hexdigest(string)
+  end
         
-    def encrypt(string)
-      secure_hash("#{salt}--#{string}")
-    end
+  def encrypt(string)
+    secure_hash("#{salt}--#{string}")
+  end
     
-    def build_inbox
-      folders.build(:name => "Inbox")
-    end
+  def build_inbox
+    folders.build(:name => "Inbox")
+  end
 end

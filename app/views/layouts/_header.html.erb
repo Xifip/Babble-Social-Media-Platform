@@ -41,6 +41,8 @@
         <li><%=  link_to_unless_current("Sign in", signin_path, ()) do
             link_to("Sign in", signin_path, :class => "current_path") end%>
         </li>
+        
+        <li><%=  link_to("Sign in with Twitter", "auth/twitter")%> </li>
 
       <% end %>
     </ul>

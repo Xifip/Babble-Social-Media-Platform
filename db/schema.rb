@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110915235633) do
+ActiveRecord::Schema.define(:version => 20110918163327) do
 
   create_table "folders", :force => true do |t|
     t.integer  "user_id"
@@ -72,6 +72,9 @@ ActiveRecord::Schema.define(:version => 20110915235633) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "twitter_img_url"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
