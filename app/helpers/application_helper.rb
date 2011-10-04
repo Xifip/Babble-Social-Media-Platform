@@ -11,7 +11,7 @@ module ApplicationHelper
   end
   
   def logo
-    logo = image_tag("cookpad_challenge.png", :alt => "Babble", :class => "")    
+    logo = image_tag("babble_logo.png", :alt => "Babble", :class => "")    
   end
    
   def checklist(name, collection, value_method, display_method, selected)

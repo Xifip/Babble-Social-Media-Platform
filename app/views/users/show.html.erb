@@ -19,12 +19,12 @@
 
   <% end %>
 </div>
-<div class="column span-5 wrap last round_green sidebar">
+<div class="column span-5 wrap last round green_border sidebar">
   <strong>Name</strong> <%= @user.name %><br/>
   <strong>Link</strong>  <%= link_to user_path(@user), @user %><br/>
   <% unless @user.twitter_username.nil? %>
     <strong>Twitter</strong>  <%= link_to "#{@user.twitter_username}", "http://twitter.com/#{@user.twitter_username}", :target => "_blank" %><br/>
   <% end %>
-  <strong>Cookposts</strong> <%= @user.microposts.count %>
+  <strong>Posts</strong> <%= @user.microposts.count %>
   <%= render 'shared/stats' %>
 </div>

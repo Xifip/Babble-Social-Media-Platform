@@ -95,7 +95,6 @@ a {
 
 a:hover {
     color: #0088ee;
-    text-decoration: none;
 }
 
 a:visited {
@@ -117,7 +116,8 @@ a.signup_button {
 
 nav {
     float: right;
-    font-size: 120%;
+    font-size: 130%;
+    margin-top: 30px;
 }
 
 nav {
@@ -138,7 +138,7 @@ nav ul li {
 }
 
 nav ul li a {
-    padding: 0 5px;
+    padding: 0 10px;
     font-weight: bold;
 }
 
@@ -151,7 +151,7 @@ nav ul li a:visited {
 }
 
 nav ul li a:hover {
-    text-decoration: none;
+   border-bottom: 3px solid #0088ee; 
 }
 
 /* borders */
@@ -171,13 +171,17 @@ nav ul li a:hover {
 /* Round corners */
 
 .round {
-    -moz-border-radius:    3px;
-    -webkit-border-radius: 3px;
-    border-radius:         3px;
+    -moz-border-radius:    4px;
+    -webkit-border-radius: 4px;
+    border-radius:         4px;
     border-style: solid;
-    border-width: 1px;
+    border-width: 2px;
     border-color: #ddd;
 
+}
+
+.green_border {
+    border-color: #00bb22;
 }
 
 /* footer */
@@ -275,8 +279,7 @@ ul.users {
 .users li:last-child {
     list-style: none;
     line-height: 65px;
-    height: 65px;
-    border-bottom: none;
+    height: 65px;    
 }
 
 .users img.gravatar {
@@ -328,6 +331,7 @@ form.new_micropost textarea:-moz-placeholder {
 
 #micropostLengthCount {
     color: #333;
+    width:200px;
 }
 
 li.feed_line:first-child {
@@ -336,7 +340,6 @@ li.feed_line:first-child {
 
 li.feed_line:last-child {
     padding-bottom: 20px;
-    border-bottom: none;
 }
 
 li.feed_line {
@@ -347,11 +350,28 @@ li.feed_line {
     padding-bottom: 20px;
 }
 
+li.feed_line a.photo_link {
+    float: left;
+    padding: 10px 10px 5px 10px;
+    background: #fff;
+    border: 2px solid #aaa;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+li.feed_line a.photo_link:hover {
+    -moz-box-shadow: 0px 2px 5px #333;
+    -webkit-box-shadow: 0px 2px 5px #333;
+    box-shadow: 0px 2px 5px #333;
+}
+
 .feed_photo {
     margin: 2px 10px 0px 10px;
 }
 
 .feed_item_create_date {
+    margin-top: 15px;
     font-size: 70%;
 }
 
@@ -397,6 +417,144 @@ ul.mail_navigation li a:visited {
     color: #0088ee;
 }
 
-ul.mail_navigation li a:hover {
+ul.mail_navigation li a:hover {  
+    border-bottom: 3px solid #0088ee; 
+}
+
+/* disable alternating colours in tables from Blueprint css */
+
+table tr:nth-child(even) td {
+    background: transparent;
+}
+
+textarea {
+    height: 1.6em;
+    width: 100%;
+    margin-bottom: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 109%;
+}
+
+/* for rotated image on home page */
+
+.imgteaser {
+    margin-top: 20px;    
+    float: left;
+    position: relative;
+
+}
+
+.imgteaser a {
     text-decoration: none;
+    float: left;
+}
+
+.imgteaser a:hover {
+    cursor: pointer;
+}
+
+.imgteaser a img {
+    float: left;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    background: #fff;
+}
+
+.imgteaser a:hover .desc{
+    display: block;
+    font-size: .8em;
+    padding: 10px 0;
+    background: #111;
+    filter:alpha(opacity=75);
+    opacity:.75;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"; /*--IE 8 Transparency--*/
+    color: #fff;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px;
+    margin: 0;
+    width: 180px;
+    border-top: 1px solid #999;
+}
+
+.imgteaser a:hover .desc strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+.imgteaser a .desc {	display: none; }
+.imgteaser a:hover .more { visibility: hidden;}
+
+.imgteaser .notch {
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    margin: 0;
+    border-top: 11px solid #fff;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    /* ie6 height fix */
+    font-size: 0;
+    line-height: 0;
+    /* ie6 transparent fix */
+    _border-right-color: pink;
+    _border-left-color: pink;
+    _filter: chroma(color=pink);
+
+}
+
+.border-callout { 
+    border: 2px solid #0088ee; 
+}
+.border-callout .border-notch { 
+    border-top-color: #0088ee; bottom: -13px; 
+}
+
+.post_form {
+    position: relative;  
+    width: 100%;  
+    height: 100%;  
+    overflow: hidden;
+    text-align: center;    
+    color: #888;
+    border: 2px solid #ff4477;  
+    -webkit-border-radius: 5px;  
+    -moz-border-radius: 5px;  
+    border-radius: 5px;    
+}
+
+.post_form:before
+
+{  
+    content: ' ';  
+    position: absolute;  
+    width: 0;  
+    height: 0;  
+    left: 10px;  
+    top: -29px;  
+    border: 14px solid;  
+    border-color: transparent transparent #ff4477 transparent;  
+}  
+
+.post_form:after 
+{  
+    content: ' ';  
+    position: absolute;  
+    width: 0;  
+    height: 0;  
+    left: 10px;  
+    top: -26px;  
+    border: 14px solid;  
+    border-color: transparent transparent #fff transparent;  
+}
+
+.display_none {
+    display: none;
 }

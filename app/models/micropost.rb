@@ -15,7 +15,7 @@ class Micropost < ActiveRecord::Base
     :storage => :s3,
     :s3_credentials => Rails.root.join("config","s3.yml").to_s,    
     :path => ":attachment/:id/:style/:filename",
-    :bucket => 'cookpadchallengephotos'
+    :bucket => 'babblephotos'
   
   default_scope :order => 'microposts.created_at DESC'
   
