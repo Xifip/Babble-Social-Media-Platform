@@ -332,6 +332,7 @@ form.new_micropost textarea:-moz-placeholder {
 #micropostLengthCount {
     color: #333;
     width:200px;
+    background: transparent;
 }
 
 li.feed_line:first-child {
@@ -520,8 +521,7 @@ textarea {
 .post_form {
     position: relative;  
     width: 100%;  
-    height: 100%;  
-    overflow: hidden;
+    height: 100%;      
     text-align: center;    
     color: #888;
     border: 2px solid #ff4477;  

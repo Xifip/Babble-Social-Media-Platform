@@ -11,7 +11,7 @@
       <h4>
         <%= feed_item.content %>        
       </h4>
-
+ 
       <% if feed_item.photo.file? %>
         <%= link_to(image_tag(feed_item.photo.url(:small), :width => '300px'), 
           feed_item.photo.url(:large), :rel => 'lightbox',:title => feed_item.content,
@@ -26,7 +26,7 @@
 
   <% if current_user?(feed_item.user) %>
 
-    <div class="right span-1 small">
+    <div class="right small">
       <%= link_to "delete", feed_item, :method => :delete,
 
         :confirm => "You sure?",
@@ -39,13 +39,13 @@
 
     <% unless feed_item.likes_count == 0 %>
       <div id="like_count_<%= feed_item.id %>" class="right small">
-        <%= pluralize(feed_item.likes_count, "Like") %>&nbsp &nbsp
+        <%= pluralize(feed_item.likes_count, "Like") %>
       </div>
     <% end %>
 
   <% else %>
 
-    <div class="span-2 small right">
+    <div class="small right">
       <%= render 'microposts/like_form', :micropost => feed_item %>
     </div>
 
