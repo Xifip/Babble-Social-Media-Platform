@@ -10,12 +10,21 @@ Babble::Application.routes.draw do
   end
   
   resources :sessions, :only => [ :new, :create, :destroy ]
-  resources :microposts, :only => [ :create, :destroy ]
+  resources :microposts, :only => [ :create, :destroy, :index ]
   resources :relationships, :only => [ :create, :destroy ]
   resources :likes, :only => [ :create, :destroy ]
   resources :sent, :only => [ :index, :new, :create ]
-  resources :messages, :only => [ :index, :show ]
+  resources :messages, :only => [ :index ]
   resources :mailbox, :only => [ :index, :show ]
+  
+  resources :messages do
+    member do
+      get :reply
+      get :reply_all
+      get :forward
+      put :set_read_state
+    end
+  end  
   
   match "/auth/:provider/callback" => "sessions#create_from_auth"
 
@@ -23,14 +32,18 @@ Babble::Application.routes.draw do
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   
+  match '/recent', :to => 'pages#recent'
   match '/contact', :to => 'pages#contact'
   match '/about', :to => 'pages#about'
   match '/help', :to => 'pages#help'
-
+  
   match "inbox" => "mailbox#index" 
   match "sent" => "sent#index"
   match "/sent/:id" => "sent#show", :as => :sent_message
   match "sent" => "sent#show"
+  match "/messages/:id" => "messages#show", :as => :received_message
+  match "messages" => "messages#show"
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

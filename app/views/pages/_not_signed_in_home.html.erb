@@ -1,15 +1,20 @@
 <div class="column span-22 main">
-<h1>Babble</h1>
-<p>This is the home page for the Babble Social Platform. Babble is a base project
-  upon which developers can build their own social media website/platform.</p>
+  <h1>Babble</h1>
+  <p>This is the home page for the Babble Social Platform. Babble is a base project
+    upon which developers can build their own social media website/platform.</p>
 
-<p>At the same
-time, it is hosted here for everyone to try out a clean and stripped down social
-networking site that has no advertisements or additional branding.</p>
+  <p>At the same
+    time, it is hosted here for everyone to try out a clean and stripped down social
+    networking site that has no advertisements or additional branding.</p>
 
-<p>If you want to, please check out the project at <a href="http://github.com/lloydmeta">Github</a>.
-</p>
+  <p>If you want to, please check out the project at <a href="http://github.com/lloydmeta">Github</a>.
+  </p>
 
 
-<%= link_to "Sign Up", signup_path, :class => "signup_button round" %>
+  <%= link_to "Sign Up", signup_path, :class => "signup_button round" %>
+
+  <div class="column span-17 main">
+    <%= render 'shared/feed' %>
+  </div>
+
 </div>

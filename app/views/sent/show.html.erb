@@ -1,7 +1,16 @@
+<% content_for :header do %>
+ <%= render 'shared/message_header'  %>
+<% end %>
+
 <%= render 'shared/message_navigation' %>
 
-<h2><%=h(@message.subject) %></h2>
-<p><strong>To:</strong> <%= @message.recipients.map(&:name).to_sentence %></p>
-<p><strong>Sent:</strong> <%= @message.created_at.to_s(:long) %></p>
+<div class="column span-19 main" >
 
-<pre><%=h @message.body %></pre>
+  <h2><%=h(@message.subject) %></h2>
+  <p><strong>To:</strong> <%= @message.recipients.map(&:name).to_sentence %></p>
+  <p><strong>Sent:</strong> <%= @message.created_at.to_s(:long) %></p>
+  
+  <p><strong>Body:</strong><br/>
+  <%= @message.body %></p>
+
+</div>

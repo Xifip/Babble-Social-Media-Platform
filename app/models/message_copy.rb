@@ -5,5 +5,7 @@ class MessageCopy < ActiveRecord::Base
   belongs_to :folder
   
   delegate :author, :created_at, :subject, :body, :recipients, :to => :message
+  
+  scope :unread, where("unread =?", true)
       
 end

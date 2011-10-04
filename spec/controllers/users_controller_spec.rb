@@ -295,8 +295,8 @@ describe UsersController do
       
       before(:each) do
         @user = test_sign_in(Factory(:user))
-        second = Factory(:user, :name => "Mai", :email => "mai@gmail.com")
-        third  = Factory(:user, :name => "Ken", :email => "kentaro@docobo.net")
+        second = Factory(:user, :name => "Abraham", :email => "Abe@gmail.com")
+        third  = Factory(:user, :name => "Clive", :email => "Clive@docobo.net")
         
         @users = [@user, second, third]
         

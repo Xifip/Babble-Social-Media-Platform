@@ -6,6 +6,7 @@ function textInputAction()
     if (textarea.value.length > maxlimit)
         textarea.value = textarea.value.substring(0, maxlimit);
     else{
+        jQuery('#micropostLengthCount').removeClass('display_none');
         countdown.value = '  ('+(maxlimit-textarea.value.length)+' characters left)';
         toggleSubmitEnable();
     }    

@@ -13,7 +13,11 @@ gem 'will_paginate', '3.0.pre2'
 
 gem 'acts_as_tree'
 
-gem "omniauth", '>=0.2.6'
+gem "omniauth", '0.2.0'
+
+gem "paperclip", '>= 2.4.0'
+
+gem 'aws-s3'
 
 # Use unicorn as the web server
 # gem 'unicorn'

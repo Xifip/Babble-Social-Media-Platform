@@ -1,50 +1,46 @@
 <header class="border_bottom">
   <%= link_to logo, root_path %>
+
   <nav>
     <ul>
 
-      <li><%=  link_to_unless_current("Home", root_path, ()) do
-          link_to("Home", root_path, :class => "current_path") end%>
+      <li><%= link_to "Home", root_path, :class => is_active?(root_path) || is_active?(recent_path) %>
       </li>
 
       <% if signed_in? %>
 
-        <li><%=  link_to_unless_current("Users", users_path, ()) do
-            link_to("Users", users_path, :class => "current_path") end%>
+        <li><%= link_to "Users", users_path, :class => is_active?(users_path)%>
         </li>
 
-        <li><%=  link_to_unless_current("Profile", current_user, ()) do
-            link_to("Profile", current_user, :class => "current_path") end%>
+        <li><%= link_to "Profile", current_user, :class => is_active?(current_user) %>
         </li>
 
-        <li><%= link_to_if(
-            current_page?(inbox_path) || current_page?(new_sent_path) || current_page?(:controller =>'sent', :action => 'show') , 
-            "Messages", inbox_path, :class => "current_path") do
-            link_to("Messages", inbox_path) end%>
-        </li>
+        <% if current_user.unread_messages_count == 0 %>
+          <li><%= link_to "Messages", inbox_path %>
+          </li>
+        <% else %>
+          <li><%= link_to "Messages (#{current_user.unread_messages_count})", inbox_path%>
+          </li>
+        <% end %>
 
-        <li><%=  link_to_unless_current("Settings", edit_user_path(current_user), ()) do
-            link_to("Settings", edit_user_path(current_user), :class => "current_path") end%>
+        <li><%= link_to "Settings", edit_user_path(current_user), :class => is_active?(edit_user_path(current_user)) %>
         </li>
-
 
       <% end %>
 
-      <li><%=  link_to_unless_current("Help", help_path, ()) do
-          link_to("Help", help_path, :class => "current_path") end%>
+      <li><%= link_to "Help", help_path, :class => is_active?(help_path)%>
       </li>
 
       <% if signed_in? %>
-        <li><%= link_to "Sign out", signout_path, :method => :delete %>
-        <% else %>
+        <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+      <% else %>
 
-        <li><%=  link_to_unless_current("Sign in", signin_path, ()) do
-            link_to("Sign in", signin_path, :class => "current_path") end%>
+        <li><%= link_to "Sign in", signin_path, :class => is_active?(signin_path)%>
         </li>
-        
-        <li><%=  link_to("Sign in with Twitter", "auth/twitter")%> </li>
+
+        <%=  link_to(image_tag("/images/twitter_sign_in.png", :style => "height:24px;width:151px; vertical-align:middle; margin-bottom:5px;"), "auth/twitter")%>
 
       <% end %>
     </ul>
-  </nav> 
+  </nav>
 </header>

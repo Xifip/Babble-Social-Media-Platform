@@ -5,14 +5,21 @@
   </div>
   <div class="wrap span-10">
     <div>
-      <%= link_to feed_item.user.name, feed_item.user %>
+      <h4><%= link_to feed_item.user.name, feed_item.user %></h4>
     </div>
     <div>
       <h4>
-        <%= feed_item.content %>
+        <%= feed_item.content %>        
       </h4>
+
+      <% if feed_item.photo.file? %>
+        <%= link_to(image_tag(feed_item.photo.url(:small), :width => '300px'), 
+          feed_item.photo.url(:large), :rel => 'lightbox',:title => feed_item.content,
+          :class => 'photo_link') %>       
+      <% end %>
+
     </div>
-    <div class="feed_item_create_date">
+    <div class="feed_item_create_date left">
       Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
     </div>
   </div>
@@ -26,9 +33,9 @@
         :title => feed_item.content %>
     </div>
   <% end %>
-  
+
   <% user = feed_item.user rescue User.find(feed_item.user_id) %>
-  <% if current_user?(user) %>
+  <% if !signed_in? || current_user?(user) %>
 
     <% unless feed_item.likes_count == 0 %>
       <div id="like_count_<%= feed_item.id %>" class="right small">

@@ -4,11 +4,12 @@
 <%-# Will_paginate method automatically adds :page to params and handles pagination%>
 <%= will_paginate %>
 
-<ul class="users">
+<ul class="users" id="paged_content">
 
   <%= render @users %>
 
 </ul>
 
 <%= will_paginate %>
+<%= pageless(@users.total_pages, request.path) %>
 </div>

@@ -2,8 +2,8 @@
   <br/>
   <nav>
     <ul>
-      <li><%= link_to "About", about_path %></li>
-      <li><%= link_to "Contact", contact_path %></li>
+      <li><%= link_to "About", about_path, :class => is_active?(about_path) %></li>
+      <li><%= link_to "Contact", contact_path, :class => is_active?(contact_path) %></li>    
     </ul>
   </nav>
 </footer>

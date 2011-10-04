@@ -1,22 +1,31 @@
 <%= javascript_include_tag "micropost.js"  %>
-
-<%= form_for @micropost do |f| %>
-  <%= render 'shared/error_messages', :object => f.object %>
-  <div class="field">
+<div class="post_form" style="margin-bottom:10px;">  
+  <%= form_for @micropost, :html => { :enctype => "multipart/form-data" } do |f| %>  
+    <%= render 'shared/error_messages', :object => f.object %>
+    <div class="field"">
     <%= f.text_area :content, 
       :onKeyDown => "textInputAction()",
       :onKeyUp => "textInputAction()",
       :onFocus => "enlargeTextArea()",
-      :placeholder => "Share your thoughts",
-      :autocomplete => "off"
+      :placeholder => "Whats up?",
+      :autocomplete => "off",
+      :style => "vertical-align:top; margin-top:13px;"
   %>
 
   </div>
-  <div id="submitbutton" class="hide actions left">
-    <%= f.submit "Submit", :class => "hide button round", :autocomplete => "off" %>
+  <div style="margin:0 10px 0 10px;">
+    <div id="submitbutton" class="hide actions left">
+      <%= f.submit "Post!", :class => "hide button round left", :style => "vertical-align:top;", :autocomplete => "off" %>   
+    </div>
+
+
+    <div class="small right column">
+      <%= f.file_field :photo, :class => "right" %>
+      Upload an Image! (.png or .jpeg) &nbsp;</div>
   </div>
-  <div class="right">
-    <input id="micropostLengthCount" readonly type="text" class="noborder" autocomplete="off"/>
-  </div>
+  <div>&nbsp</div>
+
+  <input id="micropostLengthCount" readonly type="text" class="small noborder display_none" style="width:100%; margin-left:5px;" autocomplete="off"/>
+
 <% end %>
-<br/>
+</div>

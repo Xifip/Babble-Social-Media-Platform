@@ -93,5 +93,51 @@ describe SessionsController do
     end
     
   end
+  
+  describe "POST 'create_from_auth'" do
+          
+    
+    it 'should allow sign up via OmniAuth' do
+      lambda do
+          
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
+        post :create_from_auth, :provider => 'twitter'
+                 
+      end.should change(User, :count).by(1)
+        
+    end 
+    
+    describe "sign in via OmniAuth" do
+      
+      before(:each) do
+        # create a user via Twitter signup
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
+        post :create_from_auth, :provider => 'twitter'
+        @user = User.find_by_provider_and_uid('twitter', '1234')
+      end
+      
+      it "should sign in the user" do
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
+        post :create_from_auth, :provider => 'twitter'
+        controller.current_user.should == @user
+        controller.should be_signed_in
+      end
+      
+      it "should redirect to the user to the user show page" do
+        request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:twitter] 
+        post :create_from_auth, :provider => 'twitter'
+        response.should redirect_to(root_path)
+      end
+      
+      it "should be able to grab the proper details about the user from their auth object (declared in spec_helper)" do
+        @user.name.should == 'user_nickname'
+        @user.provider.should == 'twitter'
+        @user.twitter_img_url.should == 'http://fakeimage.com'
+        @user.twitter_username.should == 'user_nickname'
+      end
+      
+    end
+        
+  end
 
 end

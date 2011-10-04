@@ -1,0 +1,35 @@
+<header>
+  <%= link_to logo, root_path %>
+
+  <nav>
+    <ul>
+
+      <li><%= link_to "Home", root_path%>
+      </li>
+
+      <li><%= link_to "Users", users_path%>
+      </li>
+
+      <li><%= link_to "Profile", current_user%>
+      </li>
+
+      <% if current_user.unread_messages_count == 0 %>
+        <li><%= link_to "Messages", inbox_path, :class => "current_path" %>
+        </li>
+      <% else %>
+        <li><%= link_to "Messages (#{current_user.unread_messages_count})", inbox_path, :class => "current_path" %>
+        </li>
+      <% end %>
+
+      <li><%= link_to "Settings", edit_user_path(current_user) %>
+      </li>
+
+      <li><%= link_to "Help", help_path%>
+      </li>
+
+      <li><%= link_to "Sign out", signout_path, :method => :delete %>
+      </li>
+
+    </ul>
+  </nav> 
+</header>

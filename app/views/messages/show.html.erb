@@ -1,9 +1,23 @@
+<% content_for :header do %>
+ <%= render 'shared/message_header'  %>
+<% end %>
+
 <%= render 'shared/message_navigation' %>
 
-<h2><%=h @message.subject %></h2>
+<div class="column span-21 main">
+  
+  <h2 ><%=h @message.subject %></h2>
 
-<p><strong>From:</strong> <%=h @message.author.name %></p>
-<p><strong>To:</strong> <%=h @message.recipients.map(&:name).to_sentence %></p>
-<p><strong>Received:</strong> <%= @message.created_at.to_s(:long) %></p>
+  <p><strong>From:</strong> <%=h @message.author.name %></p>
+  <p><strong>To:</strong> <%=h @message.recipients.map(&:name).to_sentence %></p>
+  <p><strong>Received:</strong> <%= @message.created_at.to_s(:long) %></p>
 
-<pre><%=h @message.body %></pre>
+  <p><strong>Body:</strong><br>
+    <%= @message.body %></p>
+
+  <%=  button_to 'Reply', reply_message_path(@message), :method => :get, :class => "button round column span-1" %>
+  <%=  button_to 'Reply all', reply_all_message_path(@message), :method => :get, :class => "button round column span-1" %>
+  <%=  button_to 'Forward', forward_message_path(@message), :method => :get, :class => "button round column span-1" %>
+  <%=  button_to 'Mark unread', set_read_state_message_path(:id => @message), :method => :put, :class => "button round right column span-1" %>
+
+</div>

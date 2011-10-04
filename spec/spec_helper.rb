@@ -108,4 +108,15 @@ RSpec.configure do |config|
     click_button
   end
   
+  OmniAuth.config.test_mode = true
+  OmniAuth.config.add_mock(:twitter, {'provider' => 'twitter', 
+      'uid' => '1234', 
+      'user_info' => 
+        { 
+        'name' => 'user_name',
+        'nickname' => 'user_nickname',
+        'image' => 'http://fakeimage.com'
+      }
+    }) 
+  
 end

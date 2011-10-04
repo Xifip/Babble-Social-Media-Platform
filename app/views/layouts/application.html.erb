@@ -7,18 +7,34 @@
     <%= csrf_meta_tag %> 
     <%= render 'layouts/stylesheets'%>
     <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'lightbox'  %>
+    <%= javascript_include_tag 'scriptaculous.js?load=effects,builder' %>
+    <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" %>
+    <%= javascript_include_tag "jquery.pageless.min" %>
+    
+    <!-- Enable noConflict to allow jQuery to play well with Prototype --> 
+    <script type='text/javascript'>jQuery.noConflict();</script>
   </head>
   <body>
     <div class="container">
-      <%= render 'layouts/header' %>
-      <section>
+      
+      <% if content_for?(:header) %>
+        <%= yield (:header) %>
+      <% else %>
+        <%= render 'layouts/header' %>
+      <% end %>
+      
+      <section class="round_grey">
         <% flash.each do |key, value| %>
           <%= content_tag(:div, value, :class => "flash #{key}") %>          
         <% end %>
         <%= yield %>
       </section>
+      
       <%= render 'layouts/footer' %>       
+      
       <%=  debug(params) if Rails.env.development? %>
+      
     </div>
   </body>
 </html>

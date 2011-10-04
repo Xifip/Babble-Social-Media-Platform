@@ -79,7 +79,7 @@ describe SentController do
     
     it "should have the message body" do
       get :show, :id => @message
-      response.should have_selector("pre", :content => @message.body)
+      response.should have_selector("div", :content => @message.body)
     end
     
     it "should show the message recipients" do

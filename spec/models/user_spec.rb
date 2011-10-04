@@ -73,6 +73,19 @@ describe User do
     user2.should_not be_valid
   end
   
+  it "should be able to save a twitter user name" do
+    User.create!(@attr.merge(:twitter_username => "lone_wolf989"))        
+    found_user = User.find_by_name("test name")
+    found_user.twitter_username.should == "lone_wolf989"
+  end
+  
+  it "should not have a provider, being a normally signed up user" do
+    User.create!(@attr.merge(:twitter_username => "lone_wolf989"))        
+    found_user = User.find_by_name("test name")
+    found_user.provider.should be_nil
+    found_user.uid.should be_nil
+  end
+  
   describe "password validations" do
     
     it "should require a password" do
@@ -349,7 +362,38 @@ describe User do
       
     end
     
+  end
+  
+  describe "messages" do
     
+    before(:each) do
+      @user = Factory(:user)
+      @user2 = Factory(:user, :email => Factory.next(:email))
+      @user3 = Factory(:user, :email => Factory.next(:email))
+      @attr = { :subject => "How are you?", :body => "How you're doing better than I
+      am !", :to => [@user2, @user3]}
+      
+      3.times do 
+        @user.sent_messages.create!(@attr)
+      end
+      
+    end
+    
+    it "should have unread_messages_count method" do
+      @user2.should respond_to(:unread_messages_count)
+    end
+    
+    it "should have the right unread_messages_count" do
+      @user2.unread_messages_count.should == 3
+    end
+    
+    it "should update the unread_messages_count according to the number of unread messages" do
+      @message = @user2.inbox.messages.first
+      @message.unread = false
+      @message.save
+      
+      @user2.unread_messages_count.should == 2
+    end
     
   end
   

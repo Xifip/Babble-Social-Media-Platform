@@ -58,7 +58,7 @@ describe MessageCopy do
     before(:each) do
       @messageCopies = 
         [ @user2.inbox.messages.find_by_message_id(@message),
-      @messageCopy2 = @user3.inbox.messages.find_by_message_id(@message)]
+        @messageCopy2 = @user3.inbox.messages.find_by_message_id(@message)]
     end
     
     it "should have the right author" do
@@ -95,6 +95,46 @@ describe MessageCopy do
       @messageCopies.each do |messageCopy|
         messageCopy.message.should == @message
       end
+    end
+    
+  end
+  
+  describe "Message_copy" do
+    
+    before(:each) do
+      @attr2 = { :subject => "How are you2?", :body => "blahblah!", :to => [@user2, @user3]}
+      @message2 = @user.sent_messages.create!(@attr2)
+      @messageCopy1 = @user2.inbox.messages.find_by_message_id(@message)  
+      @messageCopy2 = @user2.inbox.messages.find_by_message_id(@message2)  
+      @messageCopyArray = [@messageCopy1, @messageCopy2]
+    end
+    
+    it "should have an unread attribute" do
+      @messageCopy1.should respond_to(:unread)
+    end
+    
+    it "should be unread" do
+      @messageCopy1.should be_unread
+    end
+        
+    it "should have 2 unread messages for user2" do
+      @user2.inbox.messages.unread.count.should == 2
+    end
+    
+    it "should correspond to the 2 messages sent to user2" do
+      (@user2.inbox.messages.unread - @messageCopyArray).should == []
+    end
+    
+    it "should be able to set a message copy to read" do
+      @messageCopy1.unread = false
+      @messageCopy1.save!      
+    end
+    
+    it "should decrease the number of unread messages for a user when a message is marked as read" do
+      lambda do
+        @messageCopy1.unread = false
+        @messageCopy1.save      
+      end.should change(@user2.inbox.messages.unread, :count).by(-1)
     end
     
   end

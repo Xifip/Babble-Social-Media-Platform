@@ -1,17 +1,22 @@
 <ul class="mail_navigation">
 
-  <li><%=  link_to_unless_current("New", new_sent_path, ()) do
-      link_to("New", new_sent_path, :class => "current_path") end%>
+  <li><%= link_to "New", new_sent_path, :class => is_active?(new_sent_path) %>
   </li>
 
-  <li><%= link_to_unless_current("Inbox", inbox_path, ()) do
-      link_to("Inbox", inbox_path, :class => "current_path") end %>
-  </li>
+  <% if current_user.unread_messages_count == 0 %>
+    <li><%= link_to_if(current_page?(inbox_path) ||
+          current_page?(:controller =>'messages', :action => 'show'), "Inbox", inbox_path, :class => "current_path") do
+        link_to("Inbox", inbox_path) end %>
+    </li>
+  <% else %>
+    <li><%= link_to_if(current_page?(inbox_path) ||
+          current_page?(:controller =>'messages', :action => 'show'), "Inbox (#{current_user.unread_messages_count})", inbox_path, :class => "current_path") do
+        link_to("Inbox (#{current_user.unread_messages_count})", inbox_path) end %>
+    </li>
+  <% end %>
 
   <li><%= link_to_if(current_page?(:controller =>'sent', :action => 'show'), "Sent", sent_path, :class => "current_path") do
       link_to("Sent", sent_path) end %>
   </li>
 
 </ul>
-
-<br/>

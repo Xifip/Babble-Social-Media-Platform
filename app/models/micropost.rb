@@ -1,10 +1,7 @@
 class Micropost < ActiveRecord::Base
   
-  attr_accessible :content
-  
-  validates :user, :presence => true
-  validates :content, :presence => true, :length => { :maximum => 200}
-  
+  attr_accessible :content, :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
+     
   belongs_to :user
   
   #likes
@@ -12,12 +9,32 @@ class Micropost < ActiveRecord::Base
   has_many :likers, :through => :likes, :source => :liker, 
     :class_name => "User"
   
+  has_attached_file :photo, 
+    # override original size to save space in order to allow any size uploads  
+  :styles => { :large => "900", :original => "600", :small => "300"},
+    :storage => :s3,
+    :s3_credentials => Rails.root.join("config","s3.yml").to_s,    
+    :path => ":attachment/:id/:style/:filename",
+    :bucket => 'cookpadchallengephotos'
+  
   default_scope :order => 'microposts.created_at DESC'
   
   scope :from_users_followed_by, lambda { |user| followed_by(user)}
   
+  #validations
+  
+  validates :user, :presence => true
+  validates :content, :presence => true, :length => { :maximum => 200}
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png'], :if => :photo_attached?
+    
   def likes_count 
     likes.count
+  end
+    
+  def self.random_where(*params)
+    if (c = where(*params).count) != 0
+      where(*params).find(:first, :offset =>rand(c))
+    end
   end
   
   private
@@ -42,5 +59,9 @@ class Micropost < ActiveRecord::Base
     where("user_id IN (#{following_ids}) OR user_id = :user_id",
       { :user_id => user })
   end
+  
+  def photo_attached?
+    self.photo.file?
+  end  
   
 end

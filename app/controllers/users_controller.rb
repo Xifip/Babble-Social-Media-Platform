@@ -10,7 +10,10 @@ class UsersController < ApplicationController
     @microposts = @user.microposts.paginate(:page => params[:page])
     if signed_in?
       @micropost = Micropost.new
-    end   
+    end
+    if request.xhr?      
+      render :partial => @microposts
+    end
   end
   
   def new
@@ -87,7 +90,12 @@ class UsersController < ApplicationController
   def index
     @title = "Users"
     respond_to do |format|
-      format.html { render :html => @users = User.paginate(:page => params[:page])}
+      format.html { 
+        @users = User.paginate(:page => params[:page])
+        if request.xhr?      
+          render :partial => @users
+        end
+      }
       format.xml { render :xml => @users = User.all}
       format.json { render :json => { :items => User.all}}      
     end

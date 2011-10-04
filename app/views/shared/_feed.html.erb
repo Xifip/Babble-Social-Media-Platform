@@ -1,8 +1,32 @@
+<%if signed_in?%>
+
+  <ul class="mail_navigation left">
+
+    <li><%= link_to "Feed", root_path, :class => is_active?(root_path)%>
+    </li>
+
+    <li><%= link_to "Recent", recent_path, :class => is_active?(recent_path)%>
+    </li>
+
+  </ul>
+
+<% else %>
+  <h3>Recent Posts</h3>  
+<%end%>
+
 <% unless @feed_items.empty? %>
-  <h3>News Feed</h3>
-  <ul class="styleless">
+
+  <ul class="styleless" id="paged_content">
     <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
   </ul>
+
+
   <br/>
   <%= will_paginate @feed_items %>
+  <%= pageless(@feed_items.total_pages, request.path) %>
+
+<% end %>
+
+<% if @feed_items.empty? %>
+  <h4>Go on, make a post or Follow some Users! </h4>
 <% end %>

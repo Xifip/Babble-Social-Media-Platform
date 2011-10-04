@@ -1,15 +1,40 @@
-<%= render 'shared/message_navigation' %>
-
-<%= form_for :message, :url => {:controller => "sent", :action => "create"} do |f| %>
-
-  <p>
-    To:<br />
-    <select name="message[to][]">
-      <%= options_from_collection_for_select(User.find(:all), :id, :name, @message.to) %>
-    </select>
-  </p>
-
-  <p>Subject: <%= f.text_field :subject %></p>
-  <p>Body:<br /> <%= f.text_area :body %></p>
-  <p><%= submit_tag "Send" %></p>
+<% content_for :header do %>
+  <%= render 'shared/message_header'  %>
 <% end %>
+
+<ul class="mail_navigation">
+
+  <li><%= link_to "New", new_sent_path, :class => "current_path" %>
+  </li>
+
+  <% if current_user.unread_messages_count == 0 %>
+    <li><%= link_to "Inbox", inbox_path %>
+    </li>
+  <% else %>
+    <li><%= link_to "Inbox (#{current_user.unread_messages_count})", inbox_path %>
+    </li>
+  <% end %>
+
+  <li><%= link_to "Sent", sent_path %>
+  </li>
+
+</ul>
+
+<div class="column span-19 main" >
+
+  <%= form_for @message, :url => {:controller => "sent", :action => "create"} do |f| %>
+
+    <%= render 'shared/error_messages', :object => f.object %>
+
+    <div class="left column span-1">To:</div>
+    <%= checklist "message[to][]", User.find(:all), :id, :name, @message.to %>
+
+    <br/>
+
+
+    <p>Subject: &nbsp; <%= f.text_field :subject, :style => "width:100%;" %></p>
+    <p>Body:<br /> <%= f.text_area :body, :style => "height:200px;" %></p>    
+    <p><%= f.submit "Send", :class => "button round"%> </p>
+  <% end %>
+
+</div>

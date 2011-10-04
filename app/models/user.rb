@@ -18,7 +18,9 @@ class User < ActiveRecord::Base
   
   #normally persisted attribute accessors, only attributes in this list can be
   #set via normal http requests
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :name, :email, :password, :password_confirmation, :twitter_username
+  
+  default_scope :order => 'name ASC'
   
   #---Relationships---
   
@@ -47,14 +49,16 @@ class User < ActiveRecord::Base
   
   #---Validations---
   
+  # only run these if the user hasn't been generated through Omniauth (aka provider is empty)
+  
   #email regular expression to make sure emails are of valid format
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
-  validates :name, :presence => true, :length => { :maximum => 50}
-  validates :email, :presence => true, :format => { :with => email_regex }, :uniqueness => { :case_sensitive => false }
+  validates :name, :presence => true, :length => { :maximum => 50}, :if => :imported?
+  validates :email, :presence => true, :format => { :with => email_regex }, :uniqueness => { :case_sensitive => false }, :if => :imported?
   
   # Validation for the virtual password; password_confirmation validation is automatically created
-  validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }
+  validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }, :if => :imported?
   
   before_create :build_inbox
   
@@ -117,9 +121,14 @@ class User < ActiveRecord::Base
       user.name = auth["user_info"]["nickname"]
       user.email = auth["user_info"]["name"].gsub(/\s+/, "") << "@fromTwitter.com"
       user.twitter_img_url = auth["user_info"]["image"]
-      user.password = auth["uid"][0..40]
-      
+      user.twitter_username = auth["user_info"]["nickname"]
+      user.password = auth["uid"][0..40]      
     end
+    
+  end
+  
+  def unread_messages_count
+    self.inbox.messages.unread.count
   end
 
   
@@ -145,4 +154,9 @@ class User < ActiveRecord::Base
   def build_inbox
     folders.build(:name => "Inbox")
   end
+  
+  def imported?
+    provider.nil?
+  end
+  
 end

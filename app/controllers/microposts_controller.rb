@@ -2,7 +2,7 @@
 # and open the template in the editor.
 
 class MicropostsController < ApplicationController
-  before_filter :authenticate, :only => [:create, :destroy]
+  before_filter :authenticate, :only => [:create, :destroy, :index]
   before_filter :authorized_user, :only => :destroy
   
   def create
@@ -19,6 +19,10 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost.destroy
     redirect_back_or request.referrer
+  end
+  
+  def index
+    redirect_to root_path
   end
   
   private

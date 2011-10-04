@@ -1,5 +1,5 @@
 <div class="column span-16 main">
-  <h1>    
+  <h1 style="margin-bottom:20px;">    
     <%= gravatar_for @user %>    
     <%= @user.name %>    
   </h1>
@@ -9,16 +9,22 @@
     <%= render 'follow_form' if signed_in? %>
   <% end %>
   <% unless @user.microposts.empty? %> 
-    <ul class="styleless">
+
+    <ul class="styleless" id="paged_content">
       <%= render @microposts %>
     </ul>
     <br/>
     <%= will_paginate @microposts  %>
+    <%= pageless(@microposts.total_pages, request.path) %>
+
   <% end %>
 </div>
-<div class="column span-5 wrap last round sidebar">
+<div class="column span-5 wrap last round_green sidebar">
   <strong>Name</strong> <%= @user.name %><br/>
-  <strong>URL</strong>  <%= link_to user_path(@user), @user %>
-  <strong>Microposts</strong> <%= @user.microposts.count %>
+  <strong>Link</strong>  <%= link_to user_path(@user), @user %><br/>
+  <% unless @user.twitter_username.nil? %>
+    <strong>Twitter</strong>  <%= link_to "#{@user.twitter_username}", "http://twitter.com/#{@user.twitter_username}", :target => "_blank" %><br/>
+  <% end %>
+  <strong>Cookposts</strong> <%= @user.microposts.count %>
   <%= render 'shared/stats' %>
 </div>

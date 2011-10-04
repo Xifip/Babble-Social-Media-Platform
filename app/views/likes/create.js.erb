@@ -1,1 +1,6 @@
+if ($("like_action_<%= @micropost.id %>") != undefined){
 $("like_action_<%= @micropost.id %>").update("<%= escape_javascript(render(:partial => "microposts/unlike", :locals => {:micropost => @micropost} )) %>")
+}
+if ($("like_action_side_image<%= @micropost.id %>") != undefined){
+$("like_action_side_image<%= @micropost.id %>").update("<%= escape_javascript(render(:partial => "microposts/unlike", :locals => {:micropost => @micropost} )) %>")
+}
