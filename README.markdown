@@ -2,8 +2,13 @@
 
 Copyright (c) 2011 Lloyd Chan
 
-This is basic Social Media platform by Lloyd Chan.  It is a project created by customising Mihael Hartl's basic Twitter clone.  Anyone interested in using this code or adding to it should do so :)
-
+This is basic Social Media platform by Lloyd Chan. In essence, it  
+is a Twitter-like site that is growing through the addition of  
+new and hopefully unique features that will make it suitable to act  
+as a base social media platform. It also has a mobile iPhone client  
+called Babble-mobile. Anyone interested in using this code or  
+adding to it should do so :)  
+  
 Permission is hereby granted, free of charge, to any person  
 obtaining a copy of this software and associated documentation  
 files (the "Software"), to deal in the Software without  
