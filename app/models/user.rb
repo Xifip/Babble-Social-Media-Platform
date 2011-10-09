@@ -187,8 +187,8 @@ class User < ActiveRecord::Base
   
   def prepare_access_token(oauth_token, oauth_token_secret)
     consumer = OAuth::Consumer.new(
-      "oY0DuGUupNvEiMzpym3U8g", 
-      "fEmTdXKQZejhSgrxa0ig8YamDMwHeNr3TQhqDSWU", 
+      "L0aaBSQkv23kqeaKB3Cxyg", 
+      "oPVEEI5sa9Zq0UBYOJGwnev58J9yNXgIaDKqgxSA", 
       { :site => "http://api.twitter.com" }
     )
     
