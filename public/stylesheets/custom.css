@@ -528,7 +528,7 @@ textarea {
     -webkit-border-radius: 5px;  
     -moz-border-radius: 5px;  
     border-radius: 5px;   
-    background: pink;
+    background: #ffeeee;
 }
 
 .post_form:before
@@ -553,7 +553,7 @@ textarea {
     left: 10px;  
     top: -26px;  
     border: 14px solid;  
-    border-color: transparent transparent pink transparent;  
+    border-color: transparent transparent #ffeeee transparent;  
 }
 
 .display_none {

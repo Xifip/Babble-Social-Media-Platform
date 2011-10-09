@@ -120,17 +120,43 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.name = auth["user_info"]["nickname"]
       user.email = auth["user_info"]["name"].gsub(/\s+/, "") << "@fromTwitter.com"
+      user.description = auth["user_info"]["description"]
       user.twitter_img_url = auth["user_info"]["image"]
       user.twitter_username = auth["user_info"]["nickname"]
-      user.password = auth["uid"][0..40]      
+      user.password = auth["uid"][0..40]
+      
+      user.auth_token = auth["credentials"]["token"]
+      user.auth_secret = auth["credentials"]["secret"]
     end
     
+  end
+  
+  def self.find_with_omniauth(auth)
+    user = find_by_provider_and_uid(auth["provider"], auth["uid"])
+    if user.nil?
+      return nil
+    else
+      # Run an update on the stored values taken from auth object
+      user.twitter_img_url = auth["user_info"]["image"]
+      user.auth_token = auth["credentials"]["token"]
+      user.auth_secret = auth["credentials"]["secret"]
+      user.save
+      return user
+    end
   end
   
   def unread_messages_count
     self.inbox.messages.unread.count
   end
-
+  
+  def twitter
+    @tw_user ||= prepare_access_token(auth_token, auth_secret)
+  end
+  
+  def publish(text_to_be_published)
+    twitter.request(:post, "http://api.twitter.com/1/statuses/update.json", 
+      :status => text_to_be_published)
+  end
   
   private
   
@@ -157,6 +183,23 @@ class User < ActiveRecord::Base
   
   def imported?
     provider.nil?
+  end
+  
+  def prepare_access_token(oauth_token, oauth_token_secret)
+    consumer = OAuth::Consumer.new(
+      "oY0DuGUupNvEiMzpym3U8g", 
+      "fEmTdXKQZejhSgrxa0ig8YamDMwHeNr3TQhqDSWU", 
+      { :site => "http://api.twitter.com" }
+    )
+    
+    # create the access token object from passed values
+    
+    token_hash = { 
+      :oauth_token => oauth_token, 
+      :oauth_token_secret => oauth_token_secret 
+    }
+    access_token = OAuth::AccessToken.from_hash(consumer, token_hash)
+    return access_token
   end
   
 end

@@ -9,6 +9,9 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(params[:micropost])
     if @micropost.save
       flash[:success] = "Micropost created !"
+      
+      current_user.publish(@micropost.content) if @micropost.tweet_now == "1"
+      
       redirect_to request.referrer
     else
       @feed_items = []

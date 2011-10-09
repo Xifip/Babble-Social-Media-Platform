@@ -115,8 +115,14 @@ RSpec.configure do |config|
         { 
         'name' => 'user_name',
         'nickname' => 'user_nickname',
-        'image' => 'http://fakeimage.com'
-      }
+        'image' => 'http://fakeimage.com',
+        'description' => 'This is a mock user created for testing only'
+      },
+      'credentials' =>
+        {
+        'token' => 'fakedToken',
+        'secret' => 'easilyDiscoveredSecret'
+        }
     }) 
   
 end

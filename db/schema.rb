@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921232719) do
+ActiveRecord::Schema.define(:version => 20111007220542) do
 
   create_table "folders", :force => true do |t|
     t.integer  "user_id"
@@ -81,6 +81,9 @@ ActiveRecord::Schema.define(:version => 20110921232719) do
     t.string   "uid"
     t.string   "twitter_img_url"
     t.string   "twitter_username"
+    t.string   "auth_token"
+    t.string   "auth_secret"
+    t.string   "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

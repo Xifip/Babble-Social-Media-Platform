@@ -134,6 +134,9 @@ describe SessionsController do
         @user.provider.should == 'twitter'
         @user.twitter_img_url.should == 'http://fakeimage.com'
         @user.twitter_username.should == 'user_nickname'
+        @user.description.should == 'This is a mock user created for testing only'
+        @user.auth_token.should == 'fakedToken'
+        @user.auth_secret.should == 'easilyDiscoveredSecret'
       end
       
     end

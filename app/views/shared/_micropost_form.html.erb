@@ -2,30 +2,35 @@
 <div class="post_form" style="margin-bottom:10px;">  
   <%= form_for @micropost, :html => { :enctype => "multipart/form-data" } do |f| %>  
     <%= render 'shared/error_messages', :object => f.object %>
-    <div class="field"">
-    <%= f.text_area :content, 
-      :onKeyDown => "textInputAction()",
-      :onKeyUp => "textInputAction()",
-      :onFocus => "enlargeTextArea()",
-      :placeholder => "Whats up?",
-      :autocomplete => "off",
-      :style => "vertical-align:top; margin-top:13px;"
-  %>
+    <div class="field">
+      <%= f.text_area :content, 
+        :onKeyDown => "textInputAction()",
+        :onKeyUp => "textInputAction()",
+        :onFocus => "enlargeTextArea()",
+        :placeholder => "Whats up?",
+        :autocomplete => "off",
+        :style => "vertical-align:top; margin-top:13px;"
+    %>
 
-  </div>
-  <div style="margin:0 10px 0 10px;">
-    <div id="submitbutton" class="hide actions left">
-      <%= f.submit "Post!", :class => "hide button round left", :style => "vertical-align:top;", :autocomplete => "off" %>   
     </div>
+    <div style="margin:0 10px 0 10px;">
+      <div id="submitbutton" class="hide actions left">
+        <%if current_user.provider == "twitter"%>
+          &nbsp;
+          <%= f.check_box :tweet_now, :title => "Tweet"%> 
+          <%= image_tag "/images/twitter-bird-icon.png", :alt => "Tweet", :title => "Tweet", :height => 25, :style => "vertical-align:middle;"%>
+        <%end%>
+        <%= f.submit "Post!", :class => "hide button round left", :style => "vertical-align:top;", :autocomplete => "off" %>   
+      </div>
 
 
-    <div class="small right column">
-      <%= f.file_field :photo, :class => "right" %>
-      Upload an Image! (.png or .jpeg) &nbsp;</div>
-  </div>
-  <div>&nbsp</div>
+      <div class="small right column">
+        <%= f.file_field :photo, :class => "right" %>
+        Upload an Image! (.png or .jpeg) &nbsp;</div>
+    </div>
+    <div>&nbsp</div>
 
-  <input id="micropostLengthCount" readonly type="text" class="small noborder display_none" style="width:100%; margin-left:5px;" autocomplete="off"/>
+    <input id="micropostLengthCount" readonly type="text" class="small noborder display_none" style="width:100%; margin-left:5px;" autocomplete="off"/>
 
-<% end %>
+  <% end %>
 </div>

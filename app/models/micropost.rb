@@ -1,6 +1,9 @@
 class Micropost < ActiveRecord::Base
   
-  attr_accessible :content, :photo, :photo_file_name, :photo_content_type, :photo_file_size, :photo_updated_at
+  attr_accessor :tweet_now
+  
+  attr_accessible :content, :photo, :photo_file_name, :photo_content_type, 
+    :photo_file_size, :photo_updated_at, :tweet_now
      
   belongs_to :user
   
@@ -36,7 +39,7 @@ class Micropost < ActiveRecord::Base
       where(*params).find(:first, :offset =>rand(c))
     end
   end
-  
+    
   private
   
   # Return an SQL condition for users followed by the given user. 
@@ -62,6 +65,6 @@ class Micropost < ActiveRecord::Base
   
   def photo_attached?
     self.photo.file?
-  end  
+  end
   
 end
