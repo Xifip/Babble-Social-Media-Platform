@@ -15,12 +15,15 @@
     </div>
     <div style="margin:0 10px 0 10px;">
       <div id="submitbutton" class="hide actions left">
+        <%= f.submit "Post!", :class => "hide button round left", :style => "vertical-align:top;", :autocomplete => "off" %>   
+      </div>
+      
+      <div class="left">
         <%if current_user.provider == "twitter"%>
           &nbsp;
-          <%= f.check_box :tweet_now, :title => "Tweet"%> 
-          <%= image_tag "/images/twitter-bird-icon.png", :alt => "Tweet", :title => "Tweet", :height => 25, :style => "vertical-align:middle;"%>
+          <%= f.check_box :tweet_now, :title => "Tweet", :style => "vertical-align:middle; display:inline;"%>
+          <%= image_tag "/images/twitter-bird-icon.png", :alt => "Tweet", :title => "Tweet", :height => 25, :style => "vertical-align:middle; display:inline;" %>
         <%end%>
-        <%= f.submit "Post!", :class => "hide button round left", :style => "vertical-align:top;", :autocomplete => "off" %>   
       </div>
 
 
