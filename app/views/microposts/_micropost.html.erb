@@ -29,7 +29,7 @@
     </div>
   <% end %>
 
-  <% if current_user?(user) %>
+  <% if !signed_in? || current_user?(user) %>
 
     <% unless micropost.likes_count == 0 %>
       <div id="like_count_<%= micropost.id %>" class="right small">

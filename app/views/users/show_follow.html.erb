@@ -2,11 +2,14 @@
   <h1><%= @title %></h1>
 
   <% unless @users.empty? %>
+  
     <ul class="users">
       <%= render @users %>
     </ul>
     <%= will_paginate @users %>
+  
   <% end %>
+  
 </div>
 <div class="column span-5 wrap last round_green sidebar">
   <strong>Name</strong> <%= @user.name %><br />
@@ -17,9 +20,10 @@
   <strong>Cookposts</strong> <%= @user.microposts.count %>
   <%= render 'shared/stats' %>
   <% unless @users.empty? %>
-  <div class="sidebar_users">
-    <% @users.each do |user| %>
-      <%= link_to gravatar_for(user, :size => 30), user %>
+    <div class="sidebar_users">
+      <% @users.each do |user| %>
+        <%= link_to gravatar_for(user, :size => 30), user %>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

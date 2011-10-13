@@ -10,8 +10,10 @@ class MicropostsController < ApplicationController
     if @micropost.save
       flash[:success] = "Micropost created !"
       
-      current_user.publish(@micropost.content) if @micropost.tweet_now == "1"
-      
+      if @micropost.tweet_now == "1"
+        current_user.publish(@micropost.content << " " << user_micropost_url(current_user,@micropost))
+      end
+            
       redirect_to request.referrer
     else
       @feed_items = []
@@ -26,6 +28,29 @@ class MicropostsController < ApplicationController
   
   def index
     redirect_to root_path
+  end  
+  
+  def show
+    
+    @user = User.find(params[:user_id])
+    
+    if signed_in? && current_user?(@user)
+      @micropost = Micropost.new
+    end
+    
+    begin
+      microposts_prepage = [@user.microposts.find(params[:id])]
+    rescue
+      microposts_prepage = []
+    end
+        
+    if microposts_prepage.empty?
+      redirect_to root_path
+    else
+      @microposts = microposts_prepage.paginate(:page => params[:page])
+      render 'users/show'
+    end   
+    
   end
   
   private

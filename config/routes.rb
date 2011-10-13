@@ -7,6 +7,8 @@ Babble::Application.routes.draw do
     member do      
       get :following, :followers
     end
+    
+    resources :microposts, :only => [ :show ]
   end
   
   resources :sessions, :only => [ :new, :create, :destroy ]
