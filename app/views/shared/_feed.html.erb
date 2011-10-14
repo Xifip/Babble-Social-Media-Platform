@@ -10,15 +10,17 @@
 
   </ul>
 
+
+  <br/>
+  <br/>
+
 <% else %>
   <h3>Recent Posts</h3>  
 <%end%>
 
 <% unless @feed_items.empty? %>
 
-  <br/>
-  <br/>
-  
+
   <ul class="styleless" id="paged_content">
     <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
   </ul>
