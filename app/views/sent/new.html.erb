@@ -32,8 +32,8 @@
     <br/>
 
 
-    <p>Subject: &nbsp; <%= f.text_field :subject, :style => "width:100%;" %></p>
-    <p>Body:<br /> <%= f.text_area :body, :style => "height:200px;" %></p>    
+    <p>Subject: &nbsp; <%= f.text_field :subject, :style => "width:100%;", :class => "text" %></p>
+    <p>Body:<br /> <%= f.text_area :body, :style => "height:200px; width: 100%" %></p>    
     <p><%= f.submit "Send", :class => "button round"%> </p>
   <% end %>
 

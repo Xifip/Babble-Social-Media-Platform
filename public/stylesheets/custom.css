@@ -315,7 +315,10 @@ form.new_micropost textarea {
     width: 595px;
     margin-bottom: 0;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 109%;
+    font-size: 21px;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
 }
 
 form.new_micropost textarea::-webkit-input-placeholder {
@@ -428,12 +431,18 @@ table tr:nth-child(even) td {
     background: transparent;
 }
 
-textarea {
+textarea {    
+    border:2px solid;
+    border-color:#cccccc #dddddd #dddddd #cccccc;
     height: 1.6em;
-    width: 100%;
+    width: 595px;
     margin-bottom: 0;
     font-family: Helvetica, Arial, sans-serif;
-    font-size: 109%;
+    font-size: 21px;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    color: #333;
 }
 
 /* for rotated image on home page */
@@ -567,4 +576,26 @@ textarea {
     overflow: hidden;
     height: 30px;
     width: 30px;
+}
+
+input.text{
+    background:#fbfaf4;
+    border:2px solid;
+    border-color:#cccccc #dddddd #dddddd #cccccc;
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    width:370px;
+    height:24px;
+    padding:0 10px;
+    margin:0 7px 0 0;
+    line-height:24px;
+    font-size:18px;
+    color:#333;
+    outline:0;
+    vertical-align:middle
+}
+
+input.text:focus, input.text:active, textarea:focus, textarea:active {
+    border-color:#aaccff #bbccff #bbccff #aaccff
 }

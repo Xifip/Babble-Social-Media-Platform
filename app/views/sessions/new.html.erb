@@ -4,11 +4,11 @@
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :class => "text" %>
   </div>
   <div class="field">
     <%= f.label :password %><br />
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :class => "text" %>
   </div>
   <div class="actions">
     <%= f.submit "Sign in", :class => "button round" %>
