@@ -40,7 +40,7 @@
         <li><%= link_to "Sign in", signin_path, :class => is_active?(signin_path)%>
         </li>
 
-        <%=  link_to(image_tag("/images/twitter_sign_in.png", :style => "height:24px;width:151px; vertical-align:middle; margin-bottom:5px;"), "auth/twitter")%>
+        <%=  link_to(image_tag("/images/twitter_sign_in.png", :style => "height:24px;width:151px; vertical-align:middle; margin-bottom:5px;"), "/auth/twitter")%>
 
       <% end %>
     </ul>
