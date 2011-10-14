@@ -65,6 +65,16 @@ describe UsersController do
       response.should have_selector("input[name='user[name]'][type='text']")
     end
     
+    it "should have a Twitter username field" do
+      get :new
+      response.should have_selector("input[name='user[twitter_username]'][type='text']")
+    end
+    
+    it "should have a description field" do
+      get :new
+      response.should have_selector("input[name='user[description]'][type='text']")
+    end
+    
     it "should have an email field" do
       get :new
       response.should have_selector("input[name='user[email]'][type='text']")
@@ -217,7 +227,8 @@ describe UsersController do
 
       before(:each) do
         @attr = { :name => "New Name", :email => "user@example.org",
-          :password => "barbaz", :password_confirmation => "barbaz" }
+          :password => "barbaz", :password_confirmation => "barbaz", 
+          :description => "a description" }
       end
 
       it "should change the user's attributes" do
@@ -225,6 +236,7 @@ describe UsersController do
         @user.reload
         @user.name.should  == @attr[:name]
         @user.email.should == @attr[:email]
+        @user.description.should == @attr[:description]
       end
 
       it "should redirect to the user show page" do

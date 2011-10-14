@@ -1,8 +1,12 @@
 <div class="column span-16 main">
-  <h1 style="margin-bottom:20px;">    
+  <h1 style="margin-bottom:20px; ">    
     <%= gravatar_for @user %>    
-    <%= @user.name %>    
+    <%= @user.name %>
+    <span class="user_description">
+      <%= @user.description %>
+    </span>
   </h1>
+
   <% if (current_user?(@user) && signed_in?) %>
     <%= render 'shared/micropost_form' %>
   <%  else %>

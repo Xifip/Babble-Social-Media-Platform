@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   
   #normally persisted attribute accessors, only attributes in this list can be
   #set via normal http requests
-  attr_accessible :name, :email, :password, :password_confirmation, :twitter_username
+  attr_accessible :name, :email, :password, :password_confirmation, :twitter_username, :description
   
   default_scope :order => 'name ASC'
   
@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :maximum => 50}, :if => :imported?
   validates :email, :presence => true, :format => { :with => email_regex }, :uniqueness => { :case_sensitive => false }, :if => :imported?
+  validates :description, :length => { :maximum => 100}
   
   # Validation for the virtual password; password_confirmation validation is automatically created
   validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }, :if => :imported?
