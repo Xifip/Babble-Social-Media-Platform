@@ -16,6 +16,9 @@
 
 <% unless @feed_items.empty? %>
 
+  <br/>
+  <br/>
+  
   <ul class="styleless" id="paged_content">
     <%= render :partial => 'shared/feed_item', :collection => @feed_items %>
   </ul>

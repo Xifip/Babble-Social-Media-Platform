@@ -265,7 +265,7 @@ footer nav {
 /* User list styling*/
 
 ul.users {
-    margin-top: 1em;
+    margin-top: 1em;       
 }
 
 .users li {
@@ -276,10 +276,8 @@ ul.users {
     border-bottom: dotted 1px #ccc; 
 }
 
-.users li:last-child {
-    list-style: none;
-    line-height: 65px;
-    height: 65px;    
+.users li:first-child {
+    border-top: dotted 1px #ccc; 
 }
 
 .users img.gravatar {
@@ -336,6 +334,8 @@ form.new_micropost textarea:-moz-placeholder {
 }
 
 li.feed_line:first-child {
+    
+    border-top: dotted 1px #ccc; 
     padding-top: 10px;
 }
 
