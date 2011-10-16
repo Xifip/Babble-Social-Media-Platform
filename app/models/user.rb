@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
   
   validates :name, :presence => true, :length => { :maximum => 50}, :if => :imported?
   validates :email, :presence => true, :format => { :with => email_regex }, :uniqueness => { :case_sensitive => false }, :if => :imported?
-  validates :description, :length => { :maximum => 100}
+  validates :description, :length => { :maximum => 70}
   
   # Validation for the virtual password; password_confirmation validation is automatically created
   validates :password, :presence => true, :confirmation => true, :length => { :within => 6..40 }, :if => :imported?
@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.name = auth["user_info"]["nickname"]
       user.email = auth["user_info"]["name"].gsub(/\s+/, "") << "@fromTwitter.com"
-      user.description = auth["user_info"]["description"]
+      user.description = auth["user_info"]["description"][0..70]
       user.twitter_img_url = auth["user_info"]["image"]
       user.twitter_username = auth["user_info"]["nickname"]
       user.password = auth["uid"][0..40]
