@@ -54,7 +54,7 @@ class Micropost < ActiveRecord::Base
       :all,
       # :conditions => ["microposts.created_at > ?", 2.weeks.ago], <--to be uncommented when site gets more popular
       :joins => :likes,
-      :group => 'id',
+      :group => 'microposts.id',
       :order => 'COUNT(likes.liked_id) DESC, created_at',                                
       :limit => 5)
     return recent_most_popular_posts
