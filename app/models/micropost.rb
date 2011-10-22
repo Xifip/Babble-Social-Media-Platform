@@ -33,13 +33,34 @@ class Micropost < ActiveRecord::Base
   def likes_count 
     likes.count
   end
+  
+  def preview_content
+    if content.length < 24
+      return content
+    else
+      return content[0..20] << " ..."
+    end
+  end
     
   def self.random_where(*params)
     if (c = where(*params).count) != 0
       where(*params).find(:first, :offset =>rand(c))
     end
   end
+  
+  def self.recent_most_popular
     
+    recent_most_popular_posts = find( 
+      :all,
+      # :conditions => ["microposts.created_at > ?", 2.weeks.ago], <--to be uncommented when site gets more popular
+      :joins => :likes,
+      :group => 'id',
+      :order => 'COUNT(likes.liked_id) DESC, created_at',                                
+      :limit => 5)
+    return recent_most_popular_posts
+    
+  end
+  
   private
   
   # Return an SQL condition for users followed by the given user. 

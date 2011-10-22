@@ -44,6 +44,7 @@ class PagesController < ApplicationController
       end
       @micropost = Micropost.new
       @micropost_rotated_image = Micropost.random_where('photo_file_name is NOT NULL')
+      @recent_trending_items = Micropost.recent_most_popular
       
     else
       @feed_items = Micropost.all.paginate(:page => params[:page], :per_page => 10)

@@ -11,7 +11,7 @@
       <h4>
         <%= feed_item.content %>        
       </h4>
- 
+
       <% if feed_item.photo.file? %>
         <%= link_to(image_tag(feed_item.photo.url(:small), :width => '300px'), 
           feed_item.photo.url(:large), :rel => 'lightbox',:title => feed_item.content,
@@ -39,7 +39,7 @@
 
     <% unless feed_item.likes_count == 0 %>
       <div id="like_count_<%= feed_item.id %>" class="right small">
-        <%= pluralize(feed_item.likes_count, "Like") %>
+        <%= pluralize(feed_item.likes_count, "Like") %> &nbsp;
       </div>
     <% end %>
 

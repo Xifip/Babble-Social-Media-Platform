@@ -599,3 +599,31 @@ input.text{
 input.text:focus, input.text:active, textarea:focus, textarea:active {
     border-color:#aaccff #bbccff #bbccff #aaccff
 }
+
+li.mini_line:first-child {
+    
+    border-top: none;
+    padding-top: 5px;
+}
+
+li.mini_line:last-child {
+    padding-bottom: 5px;
+    border-bottom: none;
+}
+
+li.mini_line {
+    clear:both; 
+    margin-top: 5px; 
+    overflow:auto; 
+    border-bottom: dotted 1px #ccc; 
+}
+
+.margin-top{
+    margin-top:20px;
+}
+
+h7{
+    font-size:1.7em;
+    margin-bottom:5px;
+    color: #999;
+}

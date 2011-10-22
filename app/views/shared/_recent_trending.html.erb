@@ -1,0 +1,14 @@
+<% unless @recent_trending_items.nil? %>
+  
+  <div class="left margin-top">
+        
+    <h7>Trending</h7>
+    
+    <ul class="styleless small span-5">
+
+      <%= render :partial => 'shared/recent_trending_item', 
+        :collection => @recent_trending_items %>
+      
+    </ul>
+  </div>
+<% end %>
