@@ -13,7 +13,7 @@
 
 <%= link_to gravatar_for(@micropost_rotated_image.user, :size => 40), 
   @micropost_rotated_image.user, :class => "left", :style=> "margin:15px 13px 0 14px;"%>
-<p class="left wrap" style="margin:23px 0 0 1px;">
+<p class="left wrap span-3" style="margin:13px 0 0 1px;">
   <%= link_to @micropost_rotated_image.user.name, @micropost_rotated_image.user %></p>
 
 
@@ -24,14 +24,14 @@
 <% if current_user?(user) %>
 
   <% unless @micropost_rotated_image.likes_count == 0 %>
-    <div id="like_count_side_image<%= @micropost_rotated_image.id %>" class="small right">
+    <div id="like_count_side_image<%= @micropost_rotated_image.id %>" class="small left">
         <%= pluralize(@micropost_rotated_image.likes_count, "Like") %>
     </div>
   <% end %>
 
 <% else %>
 
-  <div id="like_action_side_image<%= @micropost_rotated_image.id %>" class="small right">
+  <div id="like_action_side_image<%= @micropost_rotated_image.id %>" class="small left">
     <% if current_user.liking?(@micropost_rotated_image) %>
       <%= render 'microposts/unlike', :micropost => @micropost_rotated_image %>
     <% else %>
