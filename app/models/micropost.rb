@@ -58,7 +58,8 @@ class Micropost < ActiveRecord::Base
                   microposts.id, 
                   microposts.user_id, 
                   microposts.created_at,
-                  microposts.updated_at',
+                  microposts.updated_at,
+                  microposts.photo_file_name',
       :order => 'COUNT(likes.liked_id) DESC, created_at',                                
       :limit => 5)
     return recent_most_popular_posts
