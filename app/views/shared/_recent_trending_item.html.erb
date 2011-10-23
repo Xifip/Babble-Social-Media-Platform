@@ -2,7 +2,7 @@
   <div class="left">
     <%= gravatar_for recent_trending_item.user, :size => 40 %>
   </div>
-  <div class="left" style="margin-left:5px;">
+  <div class="left" style="margin:7px 0 0 7px;">
     <%= link_to recent_trending_item.preview_content, 
       user_micropost_url(recent_trending_item.user,recent_trending_item), 
       :style => "vertical-align:top;" %>      

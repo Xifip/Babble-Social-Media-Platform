@@ -23,11 +23,21 @@
 
 <% if current_user?(user) %>
 
-  <% unless @micropost_rotated_image.likes_count == 0 %>
-    <div id="like_count_side_image<%= @micropost_rotated_image.id %>" class="small left">
-        <%= pluralize(@micropost_rotated_image.likes_count, "Like") %>
-    </div>
-  <% end %>
+
+  <div id="like_count_side_image<%= @micropost_rotated_image.id %>" class="small left">
+
+    <% if @micropost_rotated_image.likes_count == 0 %>
+
+      &nbsp;
+
+    <% else %>
+      
+      <%= pluralize(@micropost_rotated_image.likes_count, "Like") %>
+      
+    <% end %>
+      
+  </div>
+
 
 <% else %>
 
