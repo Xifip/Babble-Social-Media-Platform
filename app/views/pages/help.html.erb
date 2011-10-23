@@ -1,20 +1,37 @@
 <div class="column span-21 main">
   <h1>Help</h1>
+  
   <p>If you can't find the help you want here, please <%= link_to "contact me", 
       contact_path %>.</p>
+  
   <h3>Home</h3>
+  
   <p>Your home page is where you can update the babble community on your current 
     status via the creation of a micropost. It is also where your status feed is.
-  </p>
-  <h3>Status Feed</h3>
-  <p>Your status feed is where you can see your past microposts as well as the 
-    microposts of the people whom you have followed.</p>
+  </p>    
+    
+  <ul class="styleless">
+    <li><h4>Feed</h4>
+      <p>Your Feed is where you can see your past posts as well as the 
+        posts of the people whom you have followed. Both this and 'Recent' will
+        show you a paginated timeline of what has been posted in reverse chronological 
+        order</p></li>
+    <li>
+      <h4>Recent</h4>
+      <p>Clicking on 'Recent' will show you the posts of all members within the 
+        Babble community, sorted from most recent first.</p></li>
+  </ul>
+  
+  
   <h3>Users</h3>
+  
   <p>The users page contains a list of all the users currently signed up with 
     babble. From this page, you can proceed to each user's profile page by clicking
     on their name.
   </p>
+  
   <h3>Profile</h3>
+  
   <p>Clicking on the follow/unfollow button on each user's page will allow you to 
     follow/unfollow that user. If you happen to be on your own profile page, you
     can use the micropost creation form to add new microposts.
@@ -23,7 +40,37 @@
     is currently following as well as the number of people currently following that user.
     Clicking on either number will direct you to the Followers/Following page.    
   </p>
-  <h3>Followers/Following</h3>
-  <p>This is a listing of users who are either followers of a certain user or are
-  being followed by a certain user.</p>
+  
+  <ul class="styleless">
+    <li><h4>Followers/Following</h4>
+      <p>This is a listing of users who are either followers of a certain user or are
+        being followed by a certain user.</p></li>
+  </ul>
+  
+  <h3>Messaging</h3>
+  
+  <p>Messaging is the primary way to communicate privately with other pad users.
+  </p>  
+  
+  <ul class="styleless">
+    <li><h4>New</h4>
+      <p>This is where you compose a new message to send to other users.</p></li>
+    <li><h4>Inbox</h4>
+      <p>This is where you can see a list of all the messages that you've received from
+        others.  Clicking on the subject of any one of these messages will open up the message.</p></li>
+    <li><h4>Sent</h4>
+      <p>This is a list of all the messages that you've sent to other users.</p></li>
+  </ul>
+  
+  <h3>Settings</h3>
+  
+  <p>Settings is where you go to change your name, Twitter nickname, as well as your login information (email and password).    
+  </p>
+  
+  <p>If you signed up / signed in via Twitter, you only need to worry about changing your name or your Twitter nickname</p>
+  <h3>Sign Out</h3>
+  
+  <p>Click 'Sign Out' to sign out of Babble.
+  </p>
+  
 </div>
