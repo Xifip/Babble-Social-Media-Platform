@@ -115,13 +115,13 @@ class User < ActiveRecord::Base
   end  
   
   def self.create_with_omniauth(auth)
-    
+        
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
       user.name = auth["user_info"]["nickname"]
       user.email = auth["user_info"]["name"].gsub(/\s+/, "") << "@fromTwitter.com"
-      user.description = auth["user_info"]["description"][0..70]
+      user.description = auth["user_info"]["description"][0..70] unless auth["user_info"]["description"].nil?
       user.twitter_img_url = auth["user_info"]["image"]
       user.twitter_username = auth["user_info"]["nickname"]
       user.password = auth["uid"][0..40]

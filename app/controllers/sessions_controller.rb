@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
   def create_from_auth
         
     auth = request.env["omniauth.auth"]
+#    raise auth.to_yaml
     user = User.find_with_omniauth(auth) || User.create_with_omniauth(auth)
         
     sign_in user
