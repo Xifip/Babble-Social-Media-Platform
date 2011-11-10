@@ -9,7 +9,7 @@
     </div>
     <div>
       <h4>
-        <%= feed_item.content %>        
+        <%= raw  auto_link(h(feed_item.content), :html => {:target => "_blank"}) %>        
       </h4>
 
       <% if feed_item.photo.file? %>
