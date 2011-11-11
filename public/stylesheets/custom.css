@@ -339,7 +339,7 @@ form.new_micropost textarea:-moz-placeholder {
 li.feed_line:first-child {
     
     border-top: dotted 1px #ccc; 
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 li.feed_line:last-child {
